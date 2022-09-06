@@ -14,8 +14,12 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('User_id');
+            $table->integer('Game_id');
+            $table->string('comment', 200);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

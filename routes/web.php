@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |a
 */
-Route::get('/', 'PostController@index');
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/', 'PostController@index');
+});
 
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 ?>
