@@ -53,6 +53,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'age' => ['required', 'string', 'max:255'], //年齢
+            'sex' => ['required', 'string', 'max:255'], //性別
+            'image' => ['required', 'string', 'max:255'], //image画像
+            'apex_rank' => ['required', 'string', 'max:255'],
+            'valorant_rank' => ['required', 'string', 'max:255'],
+            'pubg_rank' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -68,6 +74,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'age' => $data['age'],
+            'sex' => $data['sex'],
+            'image' => $data['image'],
+            'apex_rank' => $data['apex_rank'],
+            'valorant_rank' => $data['valorant_rank'],
+            'pubg_rank' => $data['pubg_rank'],
         ]);
     }
 }
