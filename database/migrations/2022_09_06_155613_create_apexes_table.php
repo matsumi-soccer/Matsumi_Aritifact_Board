@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateApexesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('apexes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('User_id');
-            $table->integer('Game_id');
-            $table->string('Comment', 300);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->string('rank');
         });
     }
 
@@ -30,6 +26,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('apexes');
     }
 }
