@@ -12,6 +12,10 @@
 */
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'PostController@index');
+    Route::get('/apex/{apex}', 'PostController@apex_chat');
+    Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
+    Route::get('/pubg/{pubg}', 'PostController@pubg_chat');
+    
 });
 
 

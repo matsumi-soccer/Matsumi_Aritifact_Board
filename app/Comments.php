@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comments extends Model
 {
     public function getByLimit(int $limit_count = 20)
     {
