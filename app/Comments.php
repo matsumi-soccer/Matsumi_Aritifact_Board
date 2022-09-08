@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Comments extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'user_id',
         'game_id',
