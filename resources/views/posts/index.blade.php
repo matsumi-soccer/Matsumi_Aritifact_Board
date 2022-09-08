@@ -4,41 +4,15 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>chat</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-
-        <?php
-            try{
-                $pdo = new PDO(
-                    'mysql:host=localhost;dbname=board;charset=utf8',
-                    'dbuser',
-                    'Younosuke47892'
-                );
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            }catch(PDOException $Exception){
-                die('接続エラー：' .$Exception->getMessage());
-            }
-            try{
-                $sql_apex = "SELECT * FROM board.apexes";
-                $stmh_apex = $pdo->prepare($sql_apex);
-                $stmh_apex->execute();
-                $sql_valorant = "SELECT * FROM board.valorants";
-                $stmh_valorant = $pdo->prepare($sql_valorant);
-                $stmh_valorant->execute();
-                $sql_pubg = "SELECT * FROM board.pubgs";
-                $stmh_pubg = $pdo->prepare($sql_pubg);
-                $stmh_pubg->execute();
-            }catch(PDOException $Exception){
-                die('接続エラー：' .$Exception->getMessage());
-            }
-        ?>
         
+        <p>User：{{Auth::user()->name}}</P>
+        <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
         
-        {{Auth::user()->name}}
         <h1>Game掲示板</h1>
         <div class='posts'>
             <!--<h3 class='game_title'>MyPage</h3>
