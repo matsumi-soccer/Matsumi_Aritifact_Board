@@ -59,16 +59,6 @@
                     @endforeach
                 </div>
                 
-                @foreach ($comments as $comment) 
-                <div class="test">
-                    <h2 class="title">{{$comment->user_id}}</h2>
-                    <h2 class="title">{{$comment->game_id}}</h2>
-                </div>
-                @endforeach
-                
-                
-                
-                
             </div>
         </div>
         
