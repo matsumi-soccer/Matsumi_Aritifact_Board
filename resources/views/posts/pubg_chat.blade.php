@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1 class="title">
-            PLAYERUNKNOWN'S BATTLEGROUNDS：{{$pubg->rank}}帯掲示板
+            PLAYERUNKNOWN'S BATTLEGROUNDS：{{$pubga->rank}}帯掲示板
         </h1>
         
         <div class="content">

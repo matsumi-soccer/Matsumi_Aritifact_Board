@@ -12,10 +12,17 @@
 */
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'PostController@index');
+    Route::get('/create', 'PostController@create');
+    Route::post('/posts', 'PostController@store');
+    Route::get('/posts/mypage', 'PostController@mypage');
+    
+    Route::get('/posts/{comment}/edit', 'PostController@edit');
+    Route::put('/posts/{comment}', 'PostController@update');
+    
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
     Route::get('/pubg/{pubg}', 'PostController@pubg_chat');
-    
+
 });
 
 

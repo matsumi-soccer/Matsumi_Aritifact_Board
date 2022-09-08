@@ -22,6 +22,7 @@
         </div>
         
         
+        <a href='/create'>chat書き込み</a>
         <div class="footer">
             <a href="/">戻る</a>
         </div>

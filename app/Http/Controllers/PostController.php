@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+/*use Illuminate\Http\Request;*/
 use App\Post;
+use App\Http\Requests\PostRequest;
 use App\Comments;
-
 use App\Apex;
 use App\Valorant;
 use App\Pubg;
-
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -32,4 +31,35 @@ class PostController extends Controller
     {
         return view('posts/pubg_chat')->with(['pubg' => $pubg]);
     }
+    
+    public function create()
+    {
+        return view('posts/create');
+    }
+    
+    public function store(PostRequest $request, Comments $comment)
+    {
+        $input = $request['comments'];
+        $comment->fill($input)->save();
+        return redirect('/');
+    }
+    
+    public function mypage(Comments $comment)
+    {
+        return view('posts/mypage')->with(['comments' => $comment->get()]);
+    }
+    
+    public function edit(Comments $comment)
+    {
+        return view('posts/edit')->with(['comment' => $comment]);
+    }
+    
+    public function update(PostRequest $request, Comments $comment)
+    {
+        $input_post = $request['comments'];
+        $comment->fill($input_post)->save();
+    
+        return redirect('/posts/mypage');
+    }
 }
+?>
