@@ -18,19 +18,19 @@ class PostController extends Controller
         return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->get(), 'valorant'=>$valorant->get(), 'pubg'=>$pubg->get()]);
     }
     
-    public function apex_chat(Apex $apex)
+    public function apex_chat(Apex $apex, Comments $comment)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex]);
+        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get()]);
     }
     
-    public function valorant_chat(Valorant $valorant)
+    public function valorant_chat(Valorant $valorant, Comments $comment)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant]);
+        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get()]);
     }
     
-     public function pubg_chat(Pubg $pubg)
+     public function pubg_chat(Pubg $pubg, Comments $comment)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg]);
+        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get()]);
     }
     
     //コメント作成

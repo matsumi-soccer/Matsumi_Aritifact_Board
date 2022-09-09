@@ -7,16 +7,18 @@
         <title>chat</title>
     </head>
     <body>
-        <h1 class="title">Myページ</h1>
+        <h2 class="title">ログインユーザー：{{Auth::user()->name}}</h2>
         
         <br>
         <h2 class="title">My Rank</h2>
         <p>Apex Legends：{{Auth::user()->apex_rank}}</p>
         <p>Valorant：{{Auth::user()->valorant_rank}}</p>
         <p>PUBG：{{Auth::user()->pubg_rank}}</p>
+        <p>-----------------------------------------------------------------------</p>
         <br>
         
         <div class="chatted">
+            
             <h2 class="title">過去のコメント一覧</h2>
              @foreach ($comments as $comment) 
                 <div class="test">
@@ -26,7 +28,7 @@
                         <p>更新日時：{{$comment->updated_at}}</p>
                         <p class="edit">[<a href="/posts/{{$comment->id}}/edit">編集</a>]</p>
                         
-                        //コメント削除
+                        <!--コメント削除-->
                         <script type="text/javascript">
                             function delete_alert(e){
                                if(!window.confirm('本当に削除しますか？')){
