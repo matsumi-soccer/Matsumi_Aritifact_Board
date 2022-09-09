@@ -40,6 +40,7 @@
                 <!--valorantchat欄-->
                 <div class="valorants">
                     <h3>GameTitle：Valorant</h3>
+                    
                     @foreach ($valorant as $valorant) 
                         <div class="valorant_rank">
                             <p class="rank_chat">

@@ -7,6 +7,9 @@
         <title>chat</title>
     </head>
     <body>
+        <p>User：{{Auth::user()->name}}</P>
+        <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
+        
         <h1 class="title">コメント編集</h1>
         <div class="content">
             <form action="/posts/{{$comment->id}}" method="POST">

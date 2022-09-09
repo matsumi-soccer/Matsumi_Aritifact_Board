@@ -7,13 +7,15 @@
         <title>chat</title>
     </head>
     <body>
+        <p>User：{{Auth::user()->name}}</P>
+        <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
+        
         <h1>Game掲示板</h1>
         <form action="/posts" method="POST">
             @csrf
             <div class="body">
                 <h2>comment書き込み</h2>
                 <p>user_id={{Auth::user()->id}}</p><br>
-                <p>game_id=1</p>
                 <div class="user_id">
                     <input type ="text" name = "comments[user_id]" placeholder = "user_id" value="{{old('comments.user_id')}}"/>
                     <p class="user_id__error" style="color:red">{{ $errors->first('comments.user_id') }}</p>
