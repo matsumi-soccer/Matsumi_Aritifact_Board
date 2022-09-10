@@ -3,38 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Comments extends Model
+class Reply extends Model
 {
-    use SoftDeletes;
-    
     protected $fillable = [
         'user_id',
         'game_id',
+        'comment_id',
         'body',
     ];
     
-    public function getByLimit(int $limit_count = 20)
-    {
-        return $this->orderBy('updated_at', 'DESC')->limit($limit_count)->get();
-    }
-    
-    //ページネーション
     public function getPaginateByLimit(int $limit_count=20)
     {
         //return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
         return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
-    public function user()
+    public function comment()
     {
         return $this->belongsTo('App\User');
     }
     
-    public function replies()
+    public function user()
     {
-        return $this->hasMany('App\Reply');
+        return $this->belongsTo('App\User');
     }
 }
