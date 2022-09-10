@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 /*use Illuminate\Http\Request;*/
 use App\Post;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\ReplyRequest;
 use App\Comments;
 use App\Reply;
 use App\Apex;
@@ -47,6 +48,14 @@ class PostController extends Controller
         $input = $request['comments'];
         $comment->fill($input)->save();
         return redirect('/');
+    }
+    
+    //リプライ保存
+    public function store_reply(ReplyRequest $request, Reply $reply)
+    {
+        $input = $request['replies'];
+        $reply->fill($input)->save();
+        return redirect()->back();
     }
     
     //マイページ
