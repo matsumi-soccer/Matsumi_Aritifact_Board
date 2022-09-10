@@ -16,6 +16,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/posts', 'PostController@store');
     Route::get('/posts/mypage', 'PostController@mypage');
     
+    Route::post('/posts_reply', 'PostController@store_reply');
+    
     Route::get('/posts/{comment}/edit', 'PostController@edit');
     Route::put('/posts/{comment}', 'PostController@update');
     

@@ -13,6 +13,8 @@
   margin-bottom: 0;
 }
 
+
+
 .wrap input[type="checkbox"] {
   display: none;
 }
@@ -29,4 +31,10 @@
   height: auto;
   padding: 8px;
   background: gray;
+}
+
+.switch_reply:checked + .content {
+  height: auto;
+  padding: 8px;
+  background: #C0C0C0;
 }
