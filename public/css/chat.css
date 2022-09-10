@@ -1,0 +1,32 @@
+.wrap {
+  margin: 2em 0;
+  padding: 0;
+}
+
+.wrap label {
+  display: inline-block;
+  padding : 4px;
+  color: #fff;
+  font-weight: bold;
+  background: black;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.wrap input[type="checkbox"] {
+  display: none;
+}
+
+.wrap .content {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 0px;
+  
+}
+
+.switch:checked + .content {
+  height: auto;
+  padding: 8px;
+  background: gray;
+}

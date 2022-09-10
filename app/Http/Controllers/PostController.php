@@ -6,9 +6,11 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Comments;
+use App\Reply;
 use App\Apex;
 use App\Valorant;
 use App\Pubg;
+use App\User;
 
 class PostController extends Controller
 {
@@ -18,19 +20,19 @@ class PostController extends Controller
         return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->get(), 'valorant'=>$valorant->get(), 'pubg'=>$pubg->get()]);
     }
     
-    public function apex_chat(Apex $apex, Comments $comment)
+    public function apex_chat(Apex $apex, Comments $comment, Reply $reply)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get()]);
+        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get()]);
     }
     
-    public function valorant_chat(Valorant $valorant, Comments $comment)
+    public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply,)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get()]);
+        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get()]);
     }
     
-     public function pubg_chat(Pubg $pubg, Comments $comment)
+     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply,)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get()]);
+        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get()]);
     }
     
     //コメント作成
