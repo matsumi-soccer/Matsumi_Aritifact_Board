@@ -47,7 +47,7 @@ class PostController extends Controller
     {
         $input = $request['comments'];
         $comment->fill($input)->save();
-        return redirect('/');
+        return redirect()->back();
     }
     
     //リプライ保存
@@ -58,10 +58,27 @@ class PostController extends Controller
         return redirect()->back();
     }
     
-    //マイページ
-    public function mypage(Comments $comment)
+    //リプライ編集
+    public function edit_reply(Reply $reply)
     {
-        return view('posts/mypage')->with(['comments' => $comment->get()]);
+        return view('posts/edit_reply')->with(['reply' => $reply]);
+    }
+    
+    //リプライ更新
+    public function update_reply(ReplyRequest $request, Reply $reply)
+    {
+        $input_post = $request['replies'];
+        $reply->fill($input_post)->save();
+    
+        return redirect('/posts/mypage');
+    }
+    
+   
+    
+    //マイページ
+    public function mypage(Comments $comment, Reply $reply)
+    {
+        return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get()]);
     }
     
     //コメント編集
@@ -83,6 +100,12 @@ class PostController extends Controller
     public function delete(Comments $comment)
     {
         $comment->delete();
+        return redirect('/posts/mypage');
+    }
+    
+    public function reply_delete(Reply $reply)
+    {
+        $reply->delete();
         return redirect('/posts/mypage');
     }
 }

@@ -13,19 +13,27 @@
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'PostController@index');
     Route::get('/create', 'PostController@create');
-    Route::post('/posts', 'PostController@store');
     Route::get('/posts/mypage', 'PostController@mypage');
-    
+
+    //コメント,リプライ保存
+    Route::post('/posts', 'PostController@store');
     Route::post('/posts_reply', 'PostController@store_reply');
     
+    //コメント編集
     Route::get('/posts/{comment}/edit', 'PostController@edit');
     Route::put('/posts/{comment}', 'PostController@update');
+    
+    //リプライ編集
+    Route::get('/posts/reply/{reply}/edit', 'PostController@edit_reply');
+    Route::put('/posts/reply/{reply}', 'PostController@update_reply');
     
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
     Route::get('/pubg/{pubg}', 'PostController@pubg_chat');
     
+    //コメント,リプライ削除
     Route::delete('/posts/{comment}', 'PostController@delete');
+    Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
 
 });
 
