@@ -10,15 +10,16 @@
         <p>User：{{Auth::user()->name}}</P>
         <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
         
-        <h1 class="title">コメント編集</h1>
+        <h1 class="title">リプライ編集</h1>
         <div class="content">
-            <form action="/posts/{{$comment->id}}" method="POST">
+            <form action="/posts/reply/{{$reply->id}}" method="POST">
               @csrf
               @method('PUT')
               <div class="content__body">
-                  <input type ="hidden" name = "comments[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/><br>
-                  <input type ="hidden" name = "comments[game_id]" placeholder = "{{$comment->game_id}}" value="{{$comment->game_id}}"/><br>
-                  <input type='text' name='comments[body]' value="{{$comment->body}}">
+                  <input type ="hidden" name = "replies[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/><br>
+                  <input type ="hidden" name = "replies[game_id]" placeholder = "{{$reply->game_id}}" value="{{$reply->game_id}}"/><br>
+                  <input type ="hidden" name = "replies[comment_id]" placeholder = "{{$reply->comment_id}}" value="{{$reply->comment_id}}"/><br>
+                  <input type='text' name='replies[body]' value="{{$reply->body}}">
               </div>
               <input type="submit" value="保存">
           </form>
