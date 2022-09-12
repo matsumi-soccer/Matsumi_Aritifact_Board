@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ReplyRequest;
+use App\Http\Requests\FollowRequest;
 use App\Comments;
 use App\Reply;
 use App\Apex;
 use App\Valorant;
 use App\Pubg;
 use App\User;
+use App\Follow;
 
 class PostController extends Controller
 {
@@ -21,19 +23,19 @@ class PostController extends Controller
         return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->get(), 'valorant'=>$valorant->get(), 'pubg'=>$pubg->get()]);
     }
     
-    public function apex_chat(Apex $apex, Comments $comment, Reply $reply)
+    public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Follow $follow)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get()]);
+        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
     }
     
-    public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply,)
+    public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply, Follow $follow)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get()]);
+        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
     }
     
-     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply,)
+     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply, Follow $follow)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get()]);
+        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
     }
     
     //コメント作成
@@ -48,6 +50,28 @@ class PostController extends Controller
         $input = $request['comments'];
         $comment->fill($input)->save();
         return redirect()->back();
+    }
+    
+    //コメント編集
+    public function edit(Comments $comment)
+    {
+        return view('posts/edit')->with(['comment' => $comment]);
+    }
+    
+    //コメント更新
+    public function update(PostRequest $request, Comments $comment)
+    {
+        $input_post = $request['comments'];
+        $comment->fill($input_post)->save();
+    
+        return redirect('/posts/mypage');
+    }
+    
+    //コメント削除
+    public function delete(Comments $comment)
+    {
+        $comment->delete();
+        return redirect('/posts/mypage');
     }
     
     //リプライ保存
@@ -73,7 +97,12 @@ class PostController extends Controller
         return redirect('/posts/mypage');
     }
     
-   
+    //リプライ削除
+    public function reply_delete(Reply $reply)
+    {
+        $reply->delete();
+        return redirect('/posts/mypage');
+    }
     
     //マイページ
     public function mypage(Comments $comment, Reply $reply)
@@ -81,32 +110,19 @@ class PostController extends Controller
         return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get()]);
     }
     
-    //コメント編集
-    public function edit(Comments $comment)
+    //フォロー保存
+    public function store_follow(FollowRequest $request, Follow $follow)
     {
-        return view('posts/edit')->with(['comment' => $comment]);
+        $input = $request['follows'];
+        $follow->fill($input)->save();
+        return redirect()->back();
     }
     
-    //コメント更新
-    public function update(PostRequest $request, Comments $comment)
+    //フォロー解除
+     public function follow_delete(Follow $follow)
     {
-        $input_post = $request['comments'];
-        $comment->fill($input_post)->save();
-    
-        return redirect('/posts/mypage');
-    }
-    
-    //コメント削除
-    public function delete(Comments $comment)
-    {
-        $comment->delete();
-        return redirect('/posts/mypage');
-    }
-    
-    public function reply_delete(Reply $reply)
-    {
-        $reply->delete();
-        return redirect('/posts/mypage');
+        $follow->forceDelete();
+        return redirect()->back();
     }
 }
 ?>
