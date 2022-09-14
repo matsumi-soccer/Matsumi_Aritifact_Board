@@ -25,61 +25,82 @@
                 @foreach($comments as $comment)
                     <?php if ($comment->game_id == 3) : ?>
                         <p>コメント：{{$comment->body}}</p>
-                        <p>user：{{$comment->user->name}}</p>
-                        <!--follow機能 $follow_display=0:フォロー, 1:フォロー解除-->
-                        <!--follow解除-->
-                        <?php $follow_display = 0; ?>
-                        <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
-                            @foreach($follows as $follow)
-                                <?php if((($follow->followed_id) == ($comment->user_id)) && (($follow->following_id) == (Auth::user()->id))) : ?>
-                                    <?php $follow_display = 1; ?>
-                                    <form action="/posts_follow/{{$follow->id}}" id="form_{{$follow->id}}" method="POST" style="display:inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">フォロー解除</button>
-                                    </form>
-                                    @break
-                                <?php else: ?>
-            　　                  <?php endif; ?>
-                　　          @endforeach
-                　　          <!--follow-->
-                　　          <?php if($follow_display==0):?>
-                　　              <div class="follow">
-                                    <form action="/posts_follow" method="POST">
-                                        @csrf
-                                        <div class="body">
-                                            <div class="following_id">
-                                                <input type ="hidden" name = "follows[following_id]" placeholder = "following_id" value="{{Auth::user()->id}}"/>
-                                                <p class="following_id__error" style="color:red">{{ $errors->first('follows.following_id') }}</p>
-                                            </div>
-                                            <div class="followed_id">
-                                                <input type ="hidden" name = "follows[followed_id]" placeholder = "followed_id" value="{{$comment->user_id}}"/>
-                                                <p class="followed_id__error" style="color:red">{{ $errors->first('follows.followed_id') }}</p>
-                                            </div>
-                                        </div>
-                                        <input type="submit" value="フォロー"/>
-                                    </form>
-                                 </div>
-                                 <?php $follow_display = 1; ?>
-            　　              <?php else: ?>
-        　　                  <?php endif; ?>
-                    　　          
+                        <?php if(($comment->user->name) == (Auth::user()->name)) :?>
+                            <a href="/posts/mypage">user：{{$comment->user->name}}</a>
                         <?php else: ?>
+                            <a href="/posts_userpage/{{$comment->id}}">user：{{$comment->user->name}}</a><br>
             　　          <?php endif; ?>
-            　　          <!--follow機能　ここまで--
                         
                         <p>日時：{{$comment->updated_at}}</p>
-                        <?php $reply_count = 0; ?>
-                        @foreach($replies as $reply)
-                            <?php 
-                                if ($reply->comment_id == $comment->id) : 
-                                    $reply_count+=1;
-                            ?>
-                            <?php else: ?>
-                　　          <?php endif; ?>
-                        @endforeach
                         
-                        <!--reply-->
+                        <!--リプライ数カウント-->
+                        <div class="count_reply">
+                            <?php $reply_count = 0; ?>
+                            @foreach($replies as $reply)
+                                <?php 
+                                    if ($reply->comment_id == $comment->id) : 
+                                        $reply_count+=1;
+                                ?>
+                                <?php else: ?>
+                    　　          <?php endif; ?>
+                            @endforeach
+                        </div>
+                        
+                        <!--いいね数カウント-->
+                        <div class="count_like">
+                            <?php $like_count=0; ?>
+                            @foreach($likes as $like)
+                                <?php
+                                    if ($like->comment_id == $comment->id):
+                                        $like_count+=1;
+                                ?>
+                                <?php else: ?>
+                                <?php endif; ?>
+                            @endforeach
+                        </div>
+                        
+                        <!--likeフォーム-->
+                        <div class="likes">
+                            <?php $like_display = 0; ?>
+                            <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
+                                @foreach($likes as $like)
+                                    <?php if((($like->comment_id) == ($comment->id)) && (($like->user_id) == (Auth::user()->id))) : ?>
+                                        <?php $like_display = 1; ?>
+                                        <form action="/posts_like/{{$like->id}}" id="form_{{$like->id}}" method="POST" style="display:inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="like_button">♥{{$like_count}}</button>
+                                        </form>
+                                        @break
+                                    <?php else: ?>
+                    　　              <?php endif; ?>
+                    　　          @endforeach
+    
+                    　　          <?php if($like_display==0):?>
+                    　　          　  <div class="like">
+                                        <form action="/posts_like" method="POST">
+                                            @csrf
+                                            <div class="body">
+                                                <div class="user_id">
+                                                    <input type ="hidden" name = "likes[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                                                    <p class="user_id_error" style="color:red">{{ $errors->first('likes.user_id') }}</p>
+                                                </div>
+                                                <div class="comment_id">
+                                                    <input type ="hidden" name = "likes[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
+                                                    <p class="comment_id__error" style="color:red">{{ $errors->first('likes.comment_id') }}</p>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="♡{{$like_count}}"/>
+                                        </form>
+                                    </div>
+                                    <?php $like_display = 1; ?>
+                    　　          <?php else: ?>
+                    　　          <?php endif; ?>
+                    　　      <?php else: ?>
+                    　　      <?php endif; ?>
+                    　　</div>
+                        
+                        <!--replyフォーム-->
                         <div class="wrap">
                             <label for="label_reply{{$reply_num}}">返信</label>
                             <input type="checkbox" id="label_reply{{$reply_num}}" class="switch_reply" />
@@ -110,28 +131,28 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- reply -->
                         
-                        
-                        <!--reply表示ここから-->
-                        <?php if($reply_count > 0):?>
-                            <div class="wrap">
-                                <label for="label{{$comment->id}}">▼ {{$reply_count}}件の返信</label>
-                                <input type="checkbox" id="label{{$comment->id}}" class="switch" />
-                                <!--隠すコンテンツ -->
-                                <div class="content">
-                                    @foreach($replies as $reply)
-                                        <?php if ($reply->comment_id == $comment->id):?>
-                                            <p>{{$reply->user->name}}:{{$reply->body}}</p>
-                                        <?php else: ?>
-                            　　          <?php endif; ?>
-                                    @endforeach
+                        <!--reply表示-->
+                        <div class="display_reply">
+                            <?php if($reply_count > 0):?>
+                                <div class="wrap">
+                                    <label for="label{{$comment->id}}">▼ {{$reply_count}}件の返信</label>
+                                    <input type="checkbox" id="label{{$comment->id}}" class="switch" />
+                                    <!--隠すコンテンツ -->
+                                    <div class="content">
+                                        @foreach($replies as $reply)
+                                            <?php if ($reply->comment_id == $comment->id):?>
+                                                <p>{{$reply->user->name}}:{{$reply->body}}</p>
+                                            <?php else: ?>
+                                　　          <?php endif; ?>
+                                        @endforeach
+                                    </div>
+                                    <!--隠すコンテンツ-->
                                 </div>
-                                <!--隠すコンテンツ-->
-                            </div>
-                        <?php else: ?>
-                        <?php endif; ?>
-                        <!--ここまで-->
+                            <?php else: ?>
+                            <?php endif; ?>
+                        </div>
+                        
                         <p>--------</p>
                 　　<?php else: ?>
                 　　<?php endif; ?>
@@ -142,7 +163,8 @@
             </div>
         </div>
         
-         <form action="/posts" method="POST">
+        <!--コメント書き込みフォーム-->
+        <form action="/posts" method="POST">
             @csrf
             <div class="body">
                 <h2>comment書き込み</h2>

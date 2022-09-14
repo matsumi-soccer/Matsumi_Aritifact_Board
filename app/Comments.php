@@ -37,4 +37,9 @@ class Comments extends Model
     {
         return $this->hasMany('App\Reply');
     }
+    
+    public function likes()
+    {
+        return $this->hasMany('App\Reply');
+    }
 }
