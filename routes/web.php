@@ -22,21 +22,28 @@ Route::group(['middleware' => ['auth']], function(){
     //フォロー機能
     Route::post('/posts_follow', 'PostController@store_follow');
     
+    //いいね機能
+    Route::post('/posts_like', 'PostController@store_like');
+    
     //コメント,リプライ編集
     Route::get('/posts/{comment}/edit', 'PostController@edit');
     Route::put('/posts/{comment}', 'PostController@update');
     Route::get('/posts/reply/{reply}/edit', 'PostController@edit_reply');
     Route::put('/posts/reply/{reply}', 'PostController@update_reply');
     
+    //ユーザーページ
+    Route::get('posts_userpage/{comment}', 'PostController@userpage');
+    
     //掲示板表示
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
     Route::get('/pubg/{pubg}', 'PostController@pubg_chat');
     
-    //コメント,リプライ削除,フォロー解除
+    //コメント,リプライ削除,フォロー解除,いいね解除
     Route::delete('/posts/{comment}', 'PostController@delete');
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
     Route::delete('/posts_follow/{follow}', 'PostController@follow_delete');
+    Route::delete('/posts_like/{like}', 'PostController@like_delete');
 
 });
 

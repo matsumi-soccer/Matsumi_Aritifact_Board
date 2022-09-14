@@ -7,6 +7,7 @@ use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\FollowRequest;
+use App\Http\Requests\LikeRequest;
 use App\Comments;
 use App\Reply;
 use App\Apex;
@@ -14,6 +15,7 @@ use App\Valorant;
 use App\Pubg;
 use App\User;
 use App\Follow;
+use App\Like;
 
 class PostController extends Controller
 {
@@ -23,19 +25,19 @@ class PostController extends Controller
         return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->get(), 'valorant'=>$valorant->get(), 'pubg'=>$pubg->get()]);
     }
     
-    public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Follow $follow)
+    public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
+        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
-    public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply, Follow $follow)
+    public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
+        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
-     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply, Follow $follow)
+    public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply, Like $like)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get(), 'follows' => $follow->get()]);
+        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
     //コメント作成
@@ -104,7 +106,7 @@ class PostController extends Controller
         return redirect('/posts/mypage');
     }
     
-    //マイページ
+    //マイページ画面
     public function mypage(Comments $comment, Reply $reply)
     {
         return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get()]);
@@ -119,10 +121,32 @@ class PostController extends Controller
     }
     
     //フォロー解除
-     public function follow_delete(Follow $follow)
+    public function follow_delete(Follow $follow)
     {
         $follow->forceDelete();
         return redirect()->back();
     }
+    
+    //いいね保存
+    public function store_like(LikeRequest $request, Like $like)
+    {
+        $input = $request['likes'];
+        $like->fill($input)->save();
+        return redirect()->back();
+    }
+    
+    //いいね取り消し
+    public function like_delete(Like $like)
+    {
+        $like->forceDelete();
+        return redirect()->back();
+    }
+    
+    //ユーザーページ画面
+    public function userpage(Comments $comment, Follow $follow)
+    {
+         return view('posts/user_page')->with(['comment' => $comment, 'follows' => $follow->get()]);
+    }
+    
 }
 ?>

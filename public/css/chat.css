@@ -38,3 +38,8 @@
   padding: 8px;
   background: #C0C0C0;
 }
+
+.like_button{
+  border:0.1px solid;
+  border-radius: 2.5px;
+}
