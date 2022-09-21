@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-/*use Illuminate\Http\Request;*/
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ReplyRequest;
@@ -153,5 +154,48 @@ class PostController extends Controller
     {
          return view('posts/follower_lanking')->with(['comments' => $comment->get(), 'follows' => $follow->getAllCountAmount()]);
     }
+    
+    //キーワード検索画面
+    public function search(Request $request)
+    {
+        $comments = Comments::paginate(10);
+        $search_comment = $request->input('search');
+        $query = Comments::query();
+        
+        if($search_comment)
+        {
+            $spaceConversion = mb_convert_kana($search_comment, 's');
+            
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            
+            foreach($wordArraySearched as $value)
+            {
+                $query->where('body', 'like', '%'.$value.'%');
+            }
+            
+            $comments=$query->paginate(10);
+        }
+        
+        $replies = Reply::paginate(10);
+        $search_reply = $request->input('search');
+        $query_reply = Reply::query();
+        
+        if($search_reply)
+        {
+            $spaceConversion_reply = mb_convert_kana($search_reply, 's');
+            
+            $wordArraySearched_reply = preg_split('/[\s,]+/', $spaceConversion_reply, -1, PREG_SPLIT_NO_EMPTY);
+            
+            foreach($wordArraySearched_reply as $value)
+            {
+                $query_reply->where('body', 'like', '%'.$value.'%');
+            }
+            
+            $replies=$query->paginate(10);
+        }
+        
+        return view('posts/search')->with(['comments' => $comments, 'replies' => $replies]);
+    }
+    
 }
 ?>
