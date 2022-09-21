@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth']], function(){
     //いいね機能
     Route::post('/posts_like', 'PostController@store_like');
     
+    //followerランキング
+    Route::get('/post/follower_lanking', 'PostController@follower_lanking');
+    
     //コメント,リプライ編集
     Route::get('/posts/{comment}/edit', 'PostController@edit');
     Route::put('/posts/{comment}', 'PostController@update');
@@ -33,7 +36,7 @@ Route::group(['middleware' => ['auth']], function(){
     
     //ユーザーページ
     Route::get('posts_userpage/{comment}', 'PostController@userpage');
-    
+
     //掲示板表示
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');

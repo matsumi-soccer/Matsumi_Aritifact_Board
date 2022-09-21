@@ -13,6 +13,27 @@
         <p>User：{{Auth::user()->name}}</P>
         <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
         
+        <div class="follower_lankings">
+            <p class="follower_lanking"><a href="/post/follower_lanking">フォロワーランキング</a></p>
+            <div class="follower_top">
+                <?php $count_rank=1?>
+                @foreach($follows as $follow)
+                    @foreach($comments as $comment)
+                        <?php if (($comment->user->id) == ($follow->followed_id)) : ?>
+                            <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}}位：{{$comment->user->name}}</a>
+                            @break
+                        <?php else: ?>
+            　　          <?php endif; ?>
+                    @endforeach
+                    <p>フォロワー：{{$follow->count_userid}}人</p>
+                    <?php $count_rank+=1 ?>
+                    <p>-------</p>
+                @endforeach
+            </div>
+            
+            
+        </div>
+        
         <h1>Game掲示板</h1>
         <div class='posts'>
             <!--<h3 class='game_title'>MyPage</h3>

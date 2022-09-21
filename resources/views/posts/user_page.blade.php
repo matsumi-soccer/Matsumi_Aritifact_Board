@@ -9,7 +9,6 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-    
         <h1>User：{{$comment->user->name}}</h1>
         <!--follow機能 $follow_display=0:フォロー, 1:フォロー解除-->
         <!--follow解除-->
@@ -55,9 +54,32 @@
         
         <div class='posts'>
             <h2 class="title">Game Rank</h2>
-            <p>Apex Legends：{{$comment->user->apex_rank}}</p>
-            <p>Valorant：{{$comment->user->valorant_rank}}</p>
-            <p>PUBG：{{$comment->user->pubg_rank}}</p>
+            
+            <div class="my_apexrank">
+                @foreach($apexes as $apex)
+                    <?php if(($apex->id)==($comment->user->apex_rank)): ?>
+                        <p>Apex Legends：{{$apex->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
+            <div class="my_valorantrank">
+                @foreach($valorants as $valorant)
+                    <?php if(($valorant->id)==($comment->user->valorant_rank)): ?>
+                        <p>Valorant：{{$valorant->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
+            <div class="my_pubgrank">
+                @foreach($pubgs as $pubg)
+                    <?php if(($pubg->id)==($comment->user->pubg_rank)): ?>
+                        <p>PUBG：{{$pubg->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
+
             <p>-----------------------------------------------------------------------</p>
             
            

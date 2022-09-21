@@ -117,14 +117,15 @@
                             <div class="col-md-6">
                                 <!--<input id="apex_rank" type="text" class="form-control @error('apex_rank') is-invalid @enderror" name="apex_rank" value="{{ old('apex_rank') }}" required autocomplete="apex_rank" autofocus>-->
                                 <select id="apex_rank" class="form-control @error('apex_rank') is-invalid @enderror" name='apex_rank'value="{{ old('apex_rank') }}" required autocomplete="apex_rank" autofocus>
-                                    <option value = 'Predator'>Predator</option>
-                                    <option value = 'Master'>Master</option>
-                                    <option value = 'Diamond'>Diamond</option>
-                                    <option value = 'Platinum'>Platinum</option>
-                                    <option value = 'Gold'>Gold</option>
-                                    <option value = 'Silver'>Silver</option>
-                                    <option value = 'Bronze'>Bronze</option>
-                                    <option value = 'Rookie'>Rookie</option>
+                                    <option value = '1'>Predator</option>
+                                    <option value = '2'>Master</option>
+                                    <option value = '3'>Diamond</option>
+                                    <option value = '4'>Platinum</option>
+                                    <option value = '5'>Gold</option>
+                                    <option value = '6'>Silver</option>
+                                    <option value = '7'>Bronze</option>
+                                    <option value = '8'>Rookie</option>
+                                    <option value = '100'>Unlanked</option>
                                 </select>
 
                                 @error('apex_rank')
@@ -142,15 +143,16 @@
                             <div class="col-md-6">
                                 <!--<input id="valorant_rank" type="text" class="form-control @error('valorant_rank') is-invalid @enderror" name="valorant_rank" value="{{ old('valorant_rank') }}" required autocomplete="valorant_rank" autofocus>-->
                                 <select id="valorant_rank" class="form-control @error('valorant_rank') is-invalid @enderror" name='valorant_rank'value="{{ old('valorant_rank') }}" required autocomplete="valorant_rank" autofocus>
-                                    <option value = 'Radiant'>Radiant</option>
-                                    <option value = 'Immortal'>Immortal</option>
-                                    <option value = 'Ascendant'>Ascedant</option>
-                                    <option value = 'Diamond'>Diamond</option>
-                                    <option value = 'Platinum'>Platinum</option>
-                                    <option value = 'Gold'>Gold</option>
-                                    <option value = 'Silver'>Silver</option>
-                                    <option value = 'Bronze'>Bronze</option>
-                                    <option value = 'Iron'>Iron</option>
+                                    <option value = '1'>Radiant</option>
+                                    <option value = '2'>Immortal</option>
+                                    <option value = '3'>Ascedant</option>
+                                    <option value = '4'>Diamond</option>
+                                    <option value = '5'>Platinum</option>
+                                    <option value = '6'>Gold</option>
+                                    <option value = '7'>Silver</option>
+                                    <option value = '8'>Bronze</option>
+                                    <option value = '9'>Iron</option>
+                                    <option value = '100'>Unlanked</option>
                                 </select>
 
                                 @error('valorant_rank')
@@ -168,14 +170,15 @@
                             <div class="col-md-6">
                                 <!--<input id="pubg_rank" type="text" class="form-control @error('pubg_rank') is-invalid @enderror" name="pubg_rank" value="{{ old('pubg_rank') }}" required autocomplete="pubg_rank" autofocus>-->
                                 <select id="pubg_rank" class="form-control @error('pubg_rank') is-invalid @enderror" name='pubg_rank'value="{{ old('pubg_rank') }}" required autocomplete="pubg_rank" autofocus>
-                                    <option value = 'Grand Master'>Grand Master</option>
-                                    <option value = 'Master'>Master</option>
-                                    <option value = 'Elite'>Elite</option>
-                                    <option value = 'Diamond'>Diamond</option>
-                                    <option value = 'Platinum'>Platinum</option>
-                                    <option value = 'Gold'>Gold</option>
-                                    <option value = 'Silver'>Silver</option>
-                                    <option value = 'Bronze'>Bronze</option>
+                                    <option value = '1'>Grand Master</option>
+                                    <option value = '2'>Master</option>
+                                    <option value = '3'>Elite</option>
+                                    <option value = '4'>Diamond</option>
+                                    <option value = '5'>Platinum</option>
+                                    <option value = '6'>Gold</option>
+                                    <option value = '7'>Silver</option>
+                                    <option value = '8'>Bronze</option>
+                                    <option value = '100'>Unlanked</option>
                                 </select>
                                 
                                 @error('pubg_rank')

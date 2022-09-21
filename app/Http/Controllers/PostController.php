@@ -20,9 +20,9 @@ use App\Like;
 class PostController extends Controller
 {
     //ホーム画面
-    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg)
+    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, Follow $follows)
     {
-        return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->get(), 'valorant'=>$valorant->get(), 'pubg'=>$pubg->get()]);
+        return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount()]);
     }
     
     public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Like $like)
@@ -107,9 +107,9 @@ class PostController extends Controller
     }
     
     //マイページ画面
-    public function mypage(Comments $comment, Reply $reply)
+    public function mypage(Comments $comment, Reply $reply,Apex $apex, Valorant $valorant, Pubg $pubg)
     {
-        return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get()]);
+        return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get(),'apexes' => $apex->get(), 'valorants'=> $valorant->get(), 'pubgs'=>$pubg->get()]);
     }
     
     //フォロー保存
@@ -143,10 +143,15 @@ class PostController extends Controller
     }
     
     //ユーザーページ画面
-    public function userpage(Comments $comment, Follow $follow)
+    public function userpage(Comments $comment, Follow $follow, Apex $apex, Valorant $valorant, Pubg $pubg)
     {
-         return view('posts/user_page')->with(['comment' => $comment, 'follows' => $follow->get()]);
+         return view('posts/user_page')->with(['comment' => $comment, 'follows' => $follow->get(), 'apexes' => $apex->get(), 'valorants'=> $valorant->get(), 'pubgs'=>$pubg->get()]);
     }
-    
+
+    //followerランキング画面
+    public function follower_lanking(Comments $comment, Follow $follow)
+    {
+         return view('posts/follower_lanking')->with(['comments' => $comment->get(), 'follows' => $follow->getAllCountAmount()]);
+    }
 }
 ?>
