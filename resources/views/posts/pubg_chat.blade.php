@@ -16,14 +16,20 @@
         <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
         
         <h1 class="title">
-            PLAYERUNKNOWN'S BATTLEGROUNDS：{{$pubg->rank}}帯掲示板
+            <?php if($pubg->rank == 'free'):?>
+                <p>PLAYERUNKNOWN'S BATTLEGROUNDS：{{$pubg->rank}}chat</p>
+            <?php else: ?>
+                <p>PLAYERUNKNOWN'S BATTLEGROUNDS：{{$pubg->rank}}帯掲示板</p>
+            <?php endif; ?>
         </h1>
         
         <div class="contents">
             <div class="content__post">
                 <?php $reply_num = 0; ?>
                 @foreach($comments as $comment)
-                    <?php if ($comment->game_id == 3) : ?>
+                    <!--freechat-->
+                    <?php if (($comment->game_id == 3) && ($pubg->id == 9)):?>
+                        <div class="free_chat">
                         <p>コメント：{{$comment->body}}</p>
                         <?php if(($comment->user->name) == (Auth::user()->name)) :?>
                             <a href="/posts/mypage">user：{{$comment->user->name}}</a>
@@ -76,7 +82,7 @@
                     　　              <?php endif; ?>
                     　　          @endforeach
     
-                    　　          <?php if($like_display==0):?>
+                    　　          <?php if($like_display== 0):?>
                     　　          　  <div class="like">
                                         <form action="/posts_like" method="POST">
                                             @csrf
@@ -97,11 +103,14 @@
                     　　          <?php else: ?>
                     　　          <?php endif; ?>
                     　　      <?php else: ?>
+                    　　        <p class="like_button" style ="padding:1px 6px; cursor:pointer">♡{{$like_count}}</p>
                     　　      <?php endif; ?>
                     　　</div>
-                        
-                        <!--replyフォーム-->
-                        <div class="wrap">
+                    　　
+                    　　 <!--replyフォーム-->
+                        <div class="reply">
+                            <?php if(Auth::user()->pubg_rank >= ($comment->user->pubg_rank)):?>
+                                <div class="wrap">
                             <label for="label_reply{{$reply_num}}">返信</label>
                             <input type="checkbox" id="label_reply{{$reply_num}}" class="switch_reply" />
                             <div class="content">
@@ -131,6 +140,149 @@
                                 </form>
                             </div>
                         </div>
+                            <?php else:?>
+                            <?php endif;?>
+                        </div>
+                    　　
+                    　　<!--reply表示-->
+                        <div class="display_reply">
+                            <?php if($reply_count > 0):?>
+                                <div class="wrap">
+                                    <label for="label{{$comment->id}}">▼ {{$reply_count}}件の返信</label>
+                                    <input type="checkbox" id="label{{$comment->id}}" class="switch" />
+                                    <!--隠すコンテンツ -->
+                                    <div class="content">
+                                        @foreach($replies as $reply)
+                                            <?php if ($reply->comment_id == $comment->id):?>
+                                                <p>{{$reply->user->name}}:{{$reply->body}}</p>
+                                            <?php else: ?>
+                                　　          <?php endif; ?>
+                                        @endforeach
+                                    </div>
+                                    <!--隠すコンテンツ-->
+                                </div>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <p>--------</p>
+                    </div>
+                    <!--freechat以外-->
+                    <?php elseif (($comment->game_id == 3)  &&  (($comment->user->pubg_rank) <= ($pubg->id))): ?>
+                        <div class="rank_caht">
+                        <p>コメント：{{$comment->body}}</p>
+                        <?php if(($comment->user->name) == (Auth::user()->name)) :?>
+                            <a href="/posts/mypage">user：{{$comment->user->name}}</a>
+                        <?php else: ?>
+                            <a href="/posts_userpage/{{$comment->id}}">user：{{$comment->user->name}}</a><br>
+            　　          <?php endif; ?>
+                        
+                        <p>日時：{{$comment->updated_at}}</p>
+                        
+                        <!--リプライ数カウント-->
+                        <div class="count_reply">
+                            <?php $reply_count = 0; ?>
+                            @foreach($replies as $reply)
+                                <?php 
+                                    if ($reply->comment_id == $comment->id) : 
+                                        $reply_count+=1;
+                                ?>
+                                <?php else: ?>
+                    　　          <?php endif; ?>
+                            @endforeach
+                        </div>
+                        
+                        <!--いいね数カウント-->
+                        <div class="count_like">
+                            <?php $like_count=0; ?>
+                            @foreach($likes as $like)
+                                <?php
+                                    if ($like->comment_id == $comment->id):
+                                        $like_count+=1;
+                                ?>
+                                <?php else: ?>
+                                <?php endif; ?>
+                            @endforeach
+                        </div>
+                        
+                        <!--likeフォーム-->
+                        <div class="likes">
+                            <?php $like_display = 0; ?>
+                            <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
+                                @foreach($likes as $like)
+                                    <?php if((($like->comment_id) == ($comment->id)) && (($like->user_id) == (Auth::user()->id))) : ?>
+                                        <?php $like_display = 1; ?>
+                                        <form action="/posts_like/{{$like->id}}" id="form_{{$like->id}}" method="POST" style="display:inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="like_button">♥{{$like_count}}</button>
+                                        </form>
+                                        @break
+                                    <?php else: ?>
+                    　　              <?php endif; ?>
+                    　　          @endforeach
+    
+                    　　          <?php if($like_display== 0):?>
+                    　　          　  <div class="like">
+                                        <form action="/posts_like" method="POST">
+                                            @csrf
+                                            <div class="body">
+                                                <div class="user_id">
+                                                    <input type ="hidden" name = "likes[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                                                    <p class="user_id_error" style="color:red">{{ $errors->first('likes.user_id') }}</p>
+                                                </div>
+                                                <div class="comment_id">
+                                                    <input type ="hidden" name = "likes[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
+                                                    <p class="comment_id__error" style="color:red">{{ $errors->first('likes.comment_id') }}</p>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="♡{{$like_count}}"/>
+                                        </form>
+                                    </div>
+                                    <?php $like_display = 1; ?>
+                    　　          <?php else: ?>
+                    　　          <?php endif; ?>
+                    　　      <?php else: ?>
+                    　　        <p class="like_button" style ="padding:1px 6px; cursor:pointer">♡{{$like_count}}</p>
+                    　　      <?php endif; ?>
+                    　　</div>
+                        
+                        <!--replyフォーム-->
+                        <div class="reply">
+                            <?php if(Auth::user()->pubg_rank <= ($pubg->id)):?>
+                                <div class="wrap">
+                            <label for="label_reply{{$reply_num}}">返信</label>
+                            <input type="checkbox" id="label_reply{{$reply_num}}" class="switch_reply" />
+                            <div class="content">
+                                <form action="/posts_reply" method="POST">
+                                    @csrf
+                                    <div class="body">
+                                        <h2>reply</h2>
+                                        <div class="user_id">
+                                            <p>リプライ投稿者:{{Auth::user()->name}}</p>
+                                            <input type ="hidden" name = "replies[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                                            <p class="user_id__error" style="color:red">{{ $errors->first('replies.user_id') }}</p>
+                                        </div>
+                                        <div class="game_id">
+                                            <input type ="hidden" name = "replies[game_id]" placeholder = "game_id" value="3"/>
+                                            <p class="game_id__error" style="color:red">{{ $errors->first('replies.game_id') }}</p>
+                                        </div>
+                                        <div class="comment_id">
+                                            <input type ="hidden" name = "replies[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
+                                            <p class="comment_id__error" style="color:red">{{ $errors->first('replies.comment_id') }}</p>
+                                        </div>
+                                        <div class="body">
+                                            <textarea name="replies[body]" placeholder="PUBG Comment.">{{old('replies.body')}}</textarea>
+                                            <p class="body__error" style="color:red">{{ $errors->first('replies.body') }}</p>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="返信"/>
+                                </form>
+                            </div>
+                        </div>
+                            <?php else:?>
+                            <?php endif;?>
+                        </div>
                         
                         <!--reply表示-->
                         <div class="display_reply">
@@ -154,6 +306,7 @@
                         </div>
                         
                         <p>--------</p>
+                    </div>
                 　　<?php else: ?>
                 　　<?php endif; ?>
                 <?php $reply_num +=1; ?>
@@ -164,27 +317,54 @@
         </div>
         
         <!--コメント書き込みフォーム-->
-        <form action="/posts" method="POST">
-            @csrf
-            <div class="body">
-                <h2>comment書き込み</h2>
-                <div class="user_id">
-                    <p>コメント投稿者：{{Auth::user()->name}}</p>
-                    <input type ="hidden" name = "comments[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
-                    <p class="user_id__error" style="color:red">{{ $errors->first('comments.user_id') }}</p>
-                </div>
-                <div class="game_id">
-                    <input type ="hidden" name = "comments[game_id]" placeholder = "game_id" value="3"/>
-                    <p class="game_id__error" style="color:red">{{ $errors->first('comments.game_id') }}</p>
-                </div>
+        <div class="comment">
+            <?php if((Auth::user()->pubg_rank == 100) && ($pubg->id == 9)):?>
+                <form action="/posts" method="POST">
+                @csrf
                 <div class="body">
-                    <textarea name="comments[body]" placeholder="PUBG Comment.">{{old('comments.body')}}</textarea>
-                    <p class="body__error" style="color:red">{{ $errors->first('comments.body') }}</p>
+                    <h2>comment書き込み</h2>
+                    <div class="user_id">
+                        <p>コメント投稿者：{{Auth::user()->name}}</p>
+                        <input type ="hidden" name = "comments[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                        <p class="user_id__error" style="color:red">{{ $errors->first('comments.user_id') }}</p>
+                    </div>
+                    <div class="game_id">
+                        <input type ="hidden" name = "comments[game_id]" placeholder = "game_id" value="3"/>
+                        <p class="game_id__error" style="color:red">{{ $errors->first('comments.game_id') }}</p>
+                    </div>
+                    <div class="body">
+                        <textarea name="comments[body]" placeholder="PUBG Comment.">{{old('comments.body')}}</textarea>
+                        <p class="body__error" style="color:red">{{ $errors->first('comments.body') }}</p>
+                    </div>
                 </div>
-            </div>
-            <input type="submit" value="保存"/>
-        </form>
-        
+                <input type="submit" value="保存"/>
+            </form>
+            <?php elseif(Auth::user()->pubg_rank <= ($pubg->id)):?>
+                <form action="/posts" method="POST">
+                @csrf
+                <div class="body">
+                    <h2>comment書き込み</h2>
+                    <div class="user_id">
+                        <p>コメント投稿者：{{Auth::user()->name}}</p>
+                        <input type ="hidden" name = "comments[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                        <p class="user_id__error" style="color:red">{{ $errors->first('comments.user_id') }}</p>
+                    </div>
+                    <div class="game_id">
+                        <input type ="hidden" name = "comments[game_id]" placeholder = "game_id" value="3"/>
+                        <p class="game_id__error" style="color:red">{{ $errors->first('comments.game_id') }}</p>
+                    </div>
+                    <div class="body">
+                        <textarea name="comments[body]" placeholder="PUBG Comment.">{{old('comments.body')}}</textarea>
+                        <p class="body__error" style="color:red">{{ $errors->first('comments.body') }}</p>
+                    </div>
+                </div>
+                <input type="submit" value="保存"/>
+            </form>
+            <?php else:?>
+                <p>あなたのランクではこの掲示板にはコメントできません</p>
+            <?php endif;?>
+        </div>    
+            
         <!--<a href='/create'>chat書き込み</a>-->
         <div class="footer">
             <a href="/">戻る</a>

@@ -11,9 +11,32 @@
         
         <br>
         <h2 class="title">My Rank</h2>
-        <p>Apex Legends：{{Auth::user()->apex_rank}}</p>
-        <p>Valorant：{{Auth::user()->valorant_rank}}</p>
-        <p>PUBG：{{Auth::user()->pubg_rank}}</p>
+
+        
+        <div class="my_apexrank">
+                @foreach($apexes as $apex)
+                    <?php if(($apex->id)==(Auth::user()->apex_rank)): ?>
+                        <p>Apex Legends：{{$apex->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
+            <div class="my_valorantrank">
+                @foreach($valorants as $valorant)
+                    <?php if(($valorant->id)==(Auth::user()->valorant_rank)): ?>
+                        <p>Valorant：{{$valorant->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
+            <div class="my_pubgrank">
+                @foreach($pubgs as $pubg)
+                    <?php if(($pubg->id)==(Auth::user()->pubg_rank)): ?>
+                        <p>PUBG：{{$pubg->rank}}</p>
+                    <?php else: ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
         <p>-----------------------------------------------------------------------</p>
         <br>
         

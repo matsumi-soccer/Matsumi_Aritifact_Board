@@ -49,6 +49,26 @@ class User extends Authenticatable
     
     public function likes()
     {
-        return $this->hasMany('App\Reply');
+        return $this->hasMany('App\Like');
+    }
+    
+    public function follows()
+    {
+        return $this->hasMany('App\Follow');
+    }
+    
+    public function apex()
+    {
+        return $this->belongsTo('App\Apex');
+    }
+    
+    public function valorant()
+    {
+        return $this->belongsTo('App\Valorant');
+    }
+    
+    public function pubg()
+    {
+        return $this->belongsTo('App\Pubg');
     }
 }

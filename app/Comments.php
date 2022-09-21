@@ -40,6 +40,6 @@ class Comments extends Model
     
     public function likes()
     {
-        return $this->hasMany('App\Reply');
+        return $this->hasMany('App\Like');
     }
 }
