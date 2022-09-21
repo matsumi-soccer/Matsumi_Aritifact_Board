@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth']], function(){
     //followerランキング
     Route::get('/post/follower_lanking', 'PostController@follower_lanking');
     
+    //検索機能
+    Route::get('/search', 'PostController@search');
+    
     //コメント,リプライ編集
     Route::get('/posts/{comment}/edit', 'PostController@edit');
     Route::put('/posts/{comment}', 'PostController@update');
