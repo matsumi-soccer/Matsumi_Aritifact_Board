@@ -7,9 +7,17 @@
         <title>chat</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     </head>
     <body>
         <h1>User：{{$comment->user->name}}</h1>
+        
+        <!--@if($comment->user->id != Auth::id())-->
+        <!--    <like :comment_id="{{$comment->id}}"></like>-->
+        <!--@endif-->
+        
+        
+        
         <!--follow機能 $follow_display=0:フォロー, 1:フォロー解除-->
         <!--follow解除-->
         <?php $follow_display = 0; ?>
@@ -51,6 +59,7 @@
         <?php else: ?>
 　　    <?php endif; ?>
 　　    <!--follow機能　ここまで-->
+　　    
         
         <div class='posts'>
             <h2 class="title">Game Rank</h2>
@@ -90,6 +99,7 @@
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+        
     </body>
 </html>
 

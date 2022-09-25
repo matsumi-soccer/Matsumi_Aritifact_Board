@@ -51,60 +51,12 @@
                             @endforeach
                         </div>
                         
-                        <!--いいね数カウント-->
-                        <div class="count_like">
-                            <?php $like_count=0; ?>
-                            @foreach($likes as $like)
-                                <?php
-                                    if ($like->comment_id == $comment->id):
-                                        $like_count+=1;
-                                ?>
-                                <?php else: ?>
-                                <?php endif; ?>
-                            @endforeach
+                        <!--newいいね機能-->
+                    　　<div class="row justify-content-center">
+                            <like-component
+                                :comment="{{ json_encode($comment)}}"
+                            ></like-component>
                         </div>
-
-                        <!--likeフォーム-->
-                        <div class="likes">
-                            <?php $like_display = 0; ?>
-                            <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
-                                @foreach($likes as $like)
-                                    <?php if((($like->comment_id) == ($comment->id)) && (($like->user_id) == (Auth::user()->id))) : ?>
-                                        <?php $like_display = 1; ?>
-                                        <form action="/posts_like/{{$like->id}}" id="form_{{$like->id}}" method="POST" style="display:inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="like_button">♥{{$like_count}}</button>
-                                        </form>
-                                        @break
-                                    <?php else: ?>
-                    　　              <?php endif; ?>
-                    　　          @endforeach
-    
-                    　　          <?php if($like_display==0):?>
-                    　　          　  <div class="like">
-                                        <form action="/posts_like" method="POST">
-                                            @csrf
-                                            <div class="body">
-                                                <div class="user_id">
-                                                    <input type ="hidden" name = "likes[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
-                                                    <p class="user_id_error" style="color:red">{{ $errors->first('likes.user_id') }}</p>
-                                                </div>
-                                                <div class="comment_id">
-                                                    <input type ="hidden" name = "likes[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
-                                                    <p class="comment_id__error" style="color:red">{{ $errors->first('likes.comment_id') }}</p>
-                                                </div>
-                                            </div>
-                                            <input type="submit" value="♡{{$like_count}}"/>
-                                        </form>
-                                    </div>
-                                    <?php $like_display = 1; ?>
-                    　　          <?php else: ?>
-                    　　          <?php endif; ?>
-                    　　      <?php else: ?>
-                    　　         <p class="like_button" style ="padding:1px 6px; cursor:pointer">♡{{$like_count}}</p>
-                    　　      <?php endif; ?>
-                    　　</div>
                     　　
                     　　<!--replyフォーム-->
                         <div class="reply">
@@ -191,62 +143,14 @@
                     　　          <?php endif; ?>
                             @endforeach
                         </div>
-                        
-                        <!--いいね数カウント-->
-                        <div class="count_like">
-                            <?php $like_count=0; ?>
-                            @foreach($likes as $like)
-                                <?php
-                                    if ($like->comment_id == $comment->id):
-                                        $like_count+=1;
-                                ?>
-                                <?php else: ?>
-                                <?php endif; ?>
-                            @endforeach
-                        </div>
-
-                        <!--likeフォーム-->
-                        <div class="likes">
-                            <?php $like_display = 0; ?>
-                            <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
-                                @foreach($likes as $like)
-                                    <?php if((($like->comment_id) == ($comment->id)) && (($like->user_id) == (Auth::user()->id))) : ?>
-                                        <?php $like_display = 1; ?>
-                                        <form action="/posts_like/{{$like->id}}" id="form_{{$like->id}}" method="POST" style="display:inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="like_button">♥{{$like_count}}</button>
-                                        </form>
-                                        @break
-                                    <?php else: ?>
-                    　　              <?php endif; ?>
-                    　　          @endforeach
-    
-                    　　          <?php if($like_display==0):?>
-                    　　          　  <div class="like">
-                                        <form action="/posts_like" method="POST">
-                                            @csrf
-                                            <div class="body">
-                                                <div class="user_id">
-                                                    <input type ="hidden" name = "likes[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
-                                                    <p class="user_id_error" style="color:red">{{ $errors->first('likes.user_id') }}</p>
-                                                </div>
-                                                <div class="comment_id">
-                                                    <input type ="hidden" name = "likes[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
-                                                    <p class="comment_id__error" style="color:red">{{ $errors->first('likes.comment_id') }}</p>
-                                                </div>
-                                            </div>
-                                            <input type="submit" value="♡{{$like_count}}"/>
-                                        </form>
-                                    </div>
-                                    <?php $like_display = 1; ?>
-                    　　          <?php else: ?>
-                    　　          <?php endif; ?>
-                    　　      <?php else: ?>
-                    　　         <p class="like_button" style ="padding:1px 6px; cursor:pointer">♡{{$like_count}}</p>
-                    　　      <?php endif; ?>
-                    　　</div>
                     　　
+                    　　<!--newいいね機能-->
+                    　　<div class="row justify-content-center">
+                            <like-component
+                                :comment="{{ json_encode($comment)}}"
+                            ></like-component>
+                        </div>
+                    　　  
                         <!--replyフォーム-->
                         <div class="reply">
                             <?php if(Auth::user()->apex_rank <= ($apex->id)):?>
