@@ -59,7 +59,7 @@ class User extends Authenticatable
     
     public function apex()
     {
-        return $this->belongsTo('App\Apex');
+        return $this->belongsTo('App\Apex');    
     }
     
     public function valorant()
@@ -70,5 +70,10 @@ class User extends Authenticatable
     public function pubg()
     {
         return $this->belongsTo('App\Pubg');
+    }
+    
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Comments')->withTimestamps();
     }
 }

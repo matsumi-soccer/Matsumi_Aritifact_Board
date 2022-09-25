@@ -14,7 +14,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'PostController@index');
     Route::get('/create', 'PostController@create');
     Route::get('/posts/mypage', 'PostController@mypage');
-
+    
     //コメント,リプライ保存
     Route::post('/posts', 'PostController@store');
     Route::post('/posts_reply', 'PostController@store_reply');
@@ -24,6 +24,14 @@ Route::group(['middleware' => ['auth']], function(){
     
     //いいね機能
     Route::post('/posts_like', 'PostController@store_like');
+    
+    //newいいね機能
+    //Route::get('posts/{comment}/favorites', 'FavoriteController@store')->name('favorites');
+    //Route::get('posts/{comment}/unfavorites', 'FavoriteController@destroy')->name('unfavorites');
+    Route::get('posts/{comment}/favorites', 'FavoriteController@store');
+    Route::get('posts/{comment}/unfavorites', 'FavoriteController@destroy');
+    Route::get('posts/{comment}/countfavorites', 'FavoriteController@count');
+    Route::get('posts/{comment}/hasfavorites', 'FavoriteController@hasfavorite');
     
     //followerランキング
     Route::get('/post/follower_lanking', 'PostController@follower_lanking');
@@ -39,7 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
     
     //ユーザーページ
     Route::get('posts_userpage/{comment}', 'PostController@userpage');
-
+    
     //掲示板表示
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
@@ -50,7 +58,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
     Route::delete('/posts_follow/{follow}', 'PostController@follow_delete');
     Route::delete('/posts_like/{like}', 'PostController@like_delete');
-
+    
 });
 
 

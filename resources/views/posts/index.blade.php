@@ -22,6 +22,7 @@
                 </div>
             </form>
             <button><a href="/">クリア</a></button>
+            <p></p>
         </div>
         
         <div class="follower_lankings">

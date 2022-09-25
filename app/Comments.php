@@ -42,4 +42,14 @@ class Comments extends Model
     {
         return $this->hasMany('App\Like');
     }
+    
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
+    
+    public function isLiked($user_id)
+    {
+        return $this->likes()->where('user_id', $user_id)->exists();
+    }
 }
