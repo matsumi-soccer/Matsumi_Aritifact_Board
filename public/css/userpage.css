@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+body {
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/denim.png");
+  background-repeat: repeat;
+  color: #ddd;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+.userpage-body {
+  padding: 10px 5px;
+  display: flex;
+}
+.user-name {
+  color: #f36;
+  margin: 10px 0;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
+.pasts {
+  width: 80%;
+}
+.pasts h2 {
+  color: #f36;
+  margin: 10px 0;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
+.past-comment {
+  border-bottom: 1px solid white;
+  padding: 30px 10px;
+}
+.past-name {
+  font-weight: bold;
+  color: #bbb;
+  font-size: 120%;
+}
+.comment-edit {
+  display: flex;
+}
+.comment-edit a {
+  color: #eee;
+  text-decoration: none;
+}
+.comment-edit a:hover {
+  color: #eff;
+  font-weight: bold;
+}
+.comment-edit button {
+  margin: 0 2px;
+}
+.comment-edit.edit {
+  margin: 0 2px;
+}
+.comment-edit.comment-delete {
+  margin: 0 2px;
+}
+.comment-edit.comment-delete button {
+  color: #eee;
+}
+.edit-date {
+  display: flex;
+}
+.edit-date p {
+  margin: 5px 10px 5px 0;
+}
+.past-reply {
+  border-bottom: 1px solid white;
+  padding: 30px 0;
+}
+.my-details {
+  width: 20%;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding-top: 10px;
+  padding-right: 5px;
+}
+.footer {
+  padding: 10px 5px;
+}
+.footer a {
+  color: #eee;
+  text-decoration: none;
+}
+.user-detail {
+  padding: 0 1em;
+}
+.user-detail h2 {
+  color: #f36;
+  margin: 0.5em 0;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
+.user-detail.follow-vue {
+  padding-left: 5em;
+}
+.user-detail.footer {
+  padding-left: 0;
+}

@@ -17,11 +17,12 @@ use App\Pubg;
 use App\User;
 use App\Follow;
 use App\Like;
+use App\FollowUser;
 
 class PostController extends Controller
 {
     //ホーム画面
-    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, Follow $follows)
+    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows)
     {
         return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount()]);
     }
@@ -156,9 +157,9 @@ class PostController extends Controller
     }
 
     //followerランキング画面
-    public function follower_lanking(Comments $comment, Follow $follow)
+    public function follower_lanking(Comments $comment, FollowUser $followuser)
     {
-         return view('posts/follower_lanking')->with(['comments' => $comment->get(), 'follows' => $follow->getAllCountAmount()]);
+         return view('posts/follower_lanking')->with(['comments' => $comment->get(), 'follows' => $followuser->getAllCountAmount()]);
     }
     
     //キーワード検索画面

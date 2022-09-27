@@ -5,35 +5,36 @@
     <head>
         <meta charset="utf-8">
         <title>chat</title>
+        <link rel="stylesheet" href="/css/ranking.css">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <p>User：{{Auth::user()->name}}</P>
-        <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
-        
-        <h1>フォロワーランキング</h1>
-        
-        <div class="follower_top">
-            <?php $count_rank=1?>
-            @foreach($follows as $follow)
-                @foreach($comments as $comment)
-                    <?php if (($comment->user->id) == ($follow->followed_id)) : ?>
-                        <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}}位：{{$comment->user->name}}</a>
-                        @break
-                    <?php else: ?>
-        　　          <?php endif; ?>
+        <div class="follower-body">
+            <h2>フォロワーランキング</h2>
+            
+            <div class="follower_top">
+                <?php $count_rank=1?>
+                @foreach($follows as $follow)
+                <div class="ranks">
+                    @foreach($comments as $comment)
+                        <?php if (($comment->user->id) == ($follow->followed_user_id)) : ?>
+                            <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}}位：{{$comment->user->name}}</a>
+                            @break
+                        <?php else: ?>
+            　　          <?php endif; ?>
+                    @endforeach
+                    <p>フォロワー：{{$follow->count_userid}}人</p>
+                    <?php $count_rank+=1 ?>
+                </div>
                 @endforeach
-                <p>フォロワー：{{$follow->count_userid}}人</p>
-                <?php $count_rank+=1 ?>
-                <p>-------</p>
-            @endforeach
-        </div>
-        
-        
-        <!--<a href='/create'>chat書き込み</a>-->
-        <div class="footer">
-            <a href="/">戻る</a>
+            </div>
+            
+            
+            <!--<a href='/create'>chat書き込み</a>-->
+            <div class="footer">
+                <a href="/">homeへ戻る</a>
+            </div>
         </div>
     </body>
 </html>
