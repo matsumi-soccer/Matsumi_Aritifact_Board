@@ -9,17 +9,7 @@ use Auth;
 
 class FavoriteController extends Controller
 {
-    // public function store(Comments $comment)
-    // {
-    //     $comment->users()->attach(Auth::id());
-    //     return redirect()->back();
-    // }
-    
-    // public function destroy(Comments $comment)
-    // {
-    //     $comment->users()->detach(Auth::id());
-    //     return redirect()->back();
-    // }
+
     
     public function store($id)
     {

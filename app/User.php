@@ -52,10 +52,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Like');
     }
     
-    public function follows()
-    {
-        return $this->hasMany('App\Follow');
-    }
+    // public function follows()
+    // {
+    //     return $this->hasMany('App\Follow');
+    // }
     
     public function apex()
     {
@@ -72,8 +72,21 @@ class User extends Authenticatable
         return $this->belongsTo('App\Pubg');
     }
     
+    //いいね機能
     public function favorites()
     {
         return $this->belongsToMany('App\Comments')->withTimestamps();
+    }
+    
+    // フォロワー→フォロー
+    public function followUsers()
+    {
+        return $this->belongsToMany('App\User', 'follow_users', 'followed_user_id', 'following_user_id');
+    }
+
+    // フォロー→フォロワー
+    public function follows()
+    {
+        return $this->belongsToMany('App\User', 'follow_users', 'following_user_id', 'followed_user_id');
     }
 }
