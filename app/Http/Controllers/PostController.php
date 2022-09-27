@@ -146,7 +146,13 @@ class PostController extends Controller
     //ユーザーページ画面
     public function userpage(Comments $comment, Follow $follow, Apex $apex, Valorant $valorant, Pubg $pubg)
     {
-         return view('posts/user_page')->with(['comment' => $comment, 'follows' => $follow->get(), 'apexes' => $apex->get(), 'valorants'=> $valorant->get(), 'pubgs'=>$pubg->get()]);
+        return view('posts/user_page')->with([
+            'comment' => $comment, 
+            'follows' => $follow->get(), 
+            'apexes' => $apex->get(), 
+            'valorants'=> $valorant->get(), 
+            'pubgs'=>$pubg->get(),
+        ]);
     }
 
     //followerランキング画面

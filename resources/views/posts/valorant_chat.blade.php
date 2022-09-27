@@ -121,95 +121,95 @@
                     <!--freechat以外-->
                     <?php elseif (($comment->game_id == 2) && (($comment->user->valorant_rank) <= ($valorant->id))): ?>
                         <div class="rank_chat">
-                        <p>コメント：{{$comment->body}}</p>
-                        <?php if(($comment->user->name) == (Auth::user()->name)) :?>
-                            <a href="/posts/mypage">user：{{$comment->user->name}}</a>
-                        <?php else: ?>
-                            <a href="/posts_userpage/{{$comment->id}}">user：{{$comment->user->name}}</a><br>
-            　　          <?php endif; ?>
-                        <p>日時：{{$comment->updated_at}}</p>
-                        
-                        <!--リプライ数カウント-->
-                        <div class="count_reply">
-                            <?php $reply_count = 0; ?>
-                            @foreach($replies as $reply)
-                                <?php 
-                                    if ($reply->comment_id == $comment->id) : 
-                                        $reply_count+=1;
-                                ?>
-                                <?php else: ?>
-                    　　          <?php endif; ?>
-                            @endforeach
-                        </div>
-                        
-                        <!--newいいね機能-->
-                    　　<div class="row justify-content-center">
-                            <like-component
-                                :comment="{{ json_encode($comment)}}"
-                            ></like-component>
-                        </div>
-                        
-                        
-                        <!--replyフォーム-->
-                        <div class="reply">
-                            <?php if(Auth::user()->valorant_rank <= ($valorant->id)):?>
-                            <div class="wrap">
-                            <label for="label_reply{{$reply_num}}">返信</label>
-                            <input type="checkbox" id="label_reply{{$reply_num}}" class="switch_reply" />
-                            <div class="content">
-                                <form action="/posts_reply" method="POST">
-                                    @csrf
-                                    <div class="body">
-                                        <h2>reply</h2>
-                                        <div class="user_id">
-                                            <p>リプライ投稿者:{{Auth::user()->name}}</p>
-                                            <input type ="hidden" name = "replies[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
-                                            <p class="user_id__error" style="color:red">{{ $errors->first('replies.user_id') }}</p>
-                                        </div>
-                                        <div class="game_id">
-                                            <input type ="hidden" name = "replies[game_id]" placeholder = "game_id" value="2"/>
-                                            <p class="game_id__error" style="color:red">{{ $errors->first('replies.game_id') }}</p>
-                                        </div>
-                                        <div class="comment_id">
-                                            <input type ="hidden" name = "replies[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
-                                            <p class="comment_id__error" style="color:red">{{ $errors->first('replies.comment_id') }}</p>
-                                        </div>
-                                        <div class="body">
-                                            <textarea name="replies[body]" placeholder="Valor Comment.">{{old('replies.body')}}</textarea>
-                                            <p class="body__error" style="color:red">{{ $errors->first('replies.body') }}</p>
-                                        </div>
-                                    </div>
-                                    <input type="submit" value="返信"/>
-                                </form>
-                            </div>
-                        </div>
-                            <?php else:?>
-                            <?php endif;?>
-                        </div>
-                        
-                        <!--reply表示ここから-->
-                        <div class="display_reply">
-                            <?php if($reply_count > 0):?>
-                                <div class="wrap">
-                                    <label for="label{{$comment->id}}">▼ {{$reply_count}}件の返信</label>
-                                    <input type="checkbox" id="label{{$comment->id}}" class="switch" />
-                                    <!--隠すコンテンツ -->
-                                    <div class="content">
-                                        @foreach($replies as $reply)
-                                            <?php if ($reply->comment_id == $comment->id):?>
-                                                <p>{{$reply->user->name}}:{{$reply->body}}</p>
-                                            <?php else: ?>
-                                　　          <?php endif; ?>
-                                        @endforeach
-                                    </div>
-                                    <!--隠すコンテンツ-->
-                                </div>
+                            <p>コメント：{{$comment->body}}</p>
+                            <?php if(($comment->user->name) == (Auth::user()->name)) :?>
+                                <a href="/posts/mypage">user：{{$comment->user->name}}</a>
                             <?php else: ?>
-                            <?php endif; ?>
+                                <a href="/posts_userpage/{{$comment->id}}">user：{{$comment->user->name}}</a><br>
+                　　          <?php endif; ?>
+                            <p>日時：{{$comment->updated_at}}</p>
+                            
+                            <!--リプライ数カウント-->
+                            <div class="count_reply">
+                                <?php $reply_count = 0; ?>
+                                @foreach($replies as $reply)
+                                    <?php 
+                                        if ($reply->comment_id == $comment->id) : 
+                                            $reply_count+=1;
+                                    ?>
+                                    <?php else: ?>
+                        　　          <?php endif; ?>
+                                @endforeach
+                            </div>
+                            
+                            <!--newいいね機能-->
+                        　　<div class="row justify-content-center">
+                                <like-component
+                                    :comment="{{ json_encode($comment)}}"
+                                ></like-component>
+                            </div>
+                            
+                            
+                            <!--replyフォーム-->
+                            <div class="reply">
+                                <?php if(Auth::user()->valorant_rank <= ($valorant->id)):?>
+                                <div class="wrap">
+                                <label for="label_reply{{$reply_num}}">返信</label>
+                                <input type="checkbox" id="label_reply{{$reply_num}}" class="switch_reply" />
+                                <div class="content">
+                                    <form action="/posts_reply" method="POST">
+                                        @csrf
+                                        <div class="body">
+                                            <h2>reply</h2>
+                                            <div class="user_id">
+                                                <p>リプライ投稿者:{{Auth::user()->name}}</p>
+                                                <input type ="hidden" name = "replies[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
+                                                <p class="user_id__error" style="color:red">{{ $errors->first('replies.user_id') }}</p>
+                                            </div>
+                                            <div class="game_id">
+                                                <input type ="hidden" name = "replies[game_id]" placeholder = "game_id" value="2"/>
+                                                <p class="game_id__error" style="color:red">{{ $errors->first('replies.game_id') }}</p>
+                                            </div>
+                                            <div class="comment_id">
+                                                <input type ="hidden" name = "replies[comment_id]" placeholder = "comment_id" value="{{$comment->id}}"/>
+                                                <p class="comment_id__error" style="color:red">{{ $errors->first('replies.comment_id') }}</p>
+                                            </div>
+                                            <div class="body">
+                                                <textarea name="replies[body]" placeholder="Valor Comment.">{{old('replies.body')}}</textarea>
+                                                <p class="body__error" style="color:red">{{ $errors->first('replies.body') }}</p>
+                                            </div>
+                                        </div>
+                                        <input type="submit" value="返信"/>
+                                    </form>
+                                </div>
+                            </div>
+                                <?php else:?>
+                                <?php endif;?>
+                            </div>
+                            
+                            <!--reply表示ここから-->
+                            <div class="display_reply">
+                                <?php if($reply_count > 0):?>
+                                    <div class="wrap">
+                                        <label for="label{{$comment->id}}">▼ {{$reply_count}}件の返信</label>
+                                        <input type="checkbox" id="label{{$comment->id}}" class="switch" />
+                                        <!--隠すコンテンツ -->
+                                        <div class="content">
+                                            @foreach($replies as $reply)
+                                                <?php if ($reply->comment_id == $comment->id):?>
+                                                    <p>{{$reply->user->name}}:{{$reply->body}}</p>
+                                                <?php else: ?>
+                                    　　          <?php endif; ?>
+                                            @endforeach
+                                        </div>
+                                        <!--隠すコンテンツ-->
+                                    </div>
+                                <?php else: ?>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <p>--------</p>
                         </div>
-                        
-                        <p>--------</p>
-                    </div>
                 　　<?php else: ?>
                 　　<?php endif; ?>
                 <?php $reply_num +=1; ?>

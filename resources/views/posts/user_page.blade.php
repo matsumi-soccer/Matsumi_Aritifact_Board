@@ -11,56 +11,40 @@
     </head>
     <body>
         <h1>User：{{$comment->user->name}}</h1>
-        
-        <!--@if($comment->user->id != Auth::id())-->
-        <!--    <like :comment_id="{{$comment->id}}"></like>-->
-        <!--@endif-->
-        
-        
-        
-        <!--follow機能 $follow_display=0:フォロー, 1:フォロー解除-->
-        <!--follow解除-->
-        <?php $follow_display = 0; ?>
-        <?php if((Auth::user()->id) != ($comment->user_id)) : ?>
-            @foreach($follows as $follow)
-                <?php if((($follow->followed_id) == ($comment->user_id)) && (($follow->following_id) == (Auth::user()->id))) : ?>
-                    <?php $follow_display = 1; ?>
-                    <form action="/posts_follow/{{$follow->id}}" id="form_{{$follow->id}}" method="POST" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">フォロー解除</button>
-                    </form>
-                    @break
-                <?php else: ?>
-　　            <?php endif; ?>
-　　          @endforeach
-　　          <!--follow-->
-　　          <?php if($follow_display==0):?>
-　　            <div class="follow">
-                    <form action="/posts_follow" method="POST">
-                        @csrf
-                        <div class="body">
-                            <div class="following_id">
-                                <input type ="hidden" name = "follows[following_id]" placeholder = "following_id" value="{{Auth::user()->id}}"/>
-                                <p class="following_id__error" style="color:red">{{ $errors->first('follows.following_id') }}</p>
-                            </div>
-                            <div class="followed_id">
-                                <input type ="hidden" name = "follows[followed_id]" placeholder = "followed_id" value="{{$comment->user_id}}"/>
-                                <p class="followed_id__error" style="color:red">{{ $errors->first('follows.followed_id') }}</p>
-                            </div>
-                        </div>
-                        <input type="submit" value="フォロー"/>
-                    </form>
-                </div>
-                <?php $follow_display = 1; ?>
-　　           <?php else: ?>
-　　           <?php endif; ?>
-    　　          
-        <?php else: ?>
-　　    <?php endif; ?>
-　　    <!--follow機能　ここまで-->
-　　    
-        
+
+        <!--非同期follow機能-->
+        <div class="follow-modeule">
+            <!--follow準備-->
+            <div class="follow-preparation">
+                <?php 
+                    $user=$comment->user;
+                    $user->load('followUsers');
+                    $defaultCount = count($user->followUsers);
+                    $defaultFollowed = false;
+                ?>
+                @foreach(($user->followUsers) as $user)
+                    <?php if($user->pivot->following_user_id==\Auth::user()->id):
+                        $defaultFollowed = true;
+                    ?>
+                        @break
+                    <?php else: 
+                        $defaultFollowed = false;
+                    ?>
+                    <?php endif;?>
+                @endforeach
+            </div>
+            
+            <!--follow-vue-->
+            <div class="row justify-content-center">
+                <follow-component
+                    :user = "{{ json_encode($comment->user) }}"
+                    :default-Followed = "{{ json_encode($defaultFollowed) }}"
+                    :default-Count = "{{ json_encode($defaultCount) }}"
+                ></follow-component>
+            </div>
+        </div>
+
+        <!--ゲームランク表示-->
         <div class='posts'>
             <h2 class="title">Game Rank</h2>
             

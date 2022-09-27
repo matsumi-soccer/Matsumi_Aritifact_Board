@@ -23,11 +23,13 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/posts_follow', 'PostController@store_follow');
     
     //いいね機能
-    Route::post('/posts_like', 'PostController@store_like');
+    //Route::post('/posts_like', 'PostController@store_like');
+    
+    //newフォロー機能
+    Route::post('users/{user}/follow', 'FollowUserController@follow');
+    Route::post('users/{user}/unfollow', 'FollowUserController@unfollow');
     
     //newいいね機能
-    //Route::get('posts/{comment}/favorites', 'FavoriteController@store')->name('favorites');
-    //Route::get('posts/{comment}/unfavorites', 'FavoriteController@destroy')->name('unfavorites');
     Route::get('posts/{comment}/favorites', 'FavoriteController@store');
     Route::get('posts/{comment}/unfavorites', 'FavoriteController@destroy');
     Route::get('posts/{comment}/countfavorites', 'FavoriteController@count');
@@ -57,7 +59,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::delete('/posts/{comment}', 'PostController@delete');
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
     Route::delete('/posts_follow/{follow}', 'PostController@follow_delete');
-    Route::delete('/posts_like/{like}', 'PostController@like_delete');
+    //Route::delete('/posts_like/{like}', 'PostController@like_delete');
     
 });
 
