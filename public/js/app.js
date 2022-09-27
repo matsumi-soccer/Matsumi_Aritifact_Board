@@ -2086,8 +2086,8 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("span", [!_vm.followed ? _c("button", {
-    staticClass: "btn btn-success",
+  return _c("div", [!_vm.followed ? _c("button", {
+    staticClass: "btn btn-info",
     attrs: {
       type: "button"
     },
@@ -2097,7 +2097,7 @@ var render = function render() {
       }
     }
   }, [_vm._v("フォロー")]) : _c("button", {
-    staticClass: "btn btn-danger",
+    staticClass: "btn btn-info",
     attrs: {
       type: "button"
     },

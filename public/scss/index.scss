@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+
+//css記述
+body{
+  background-image:url("https://www.toptal.com/designers/subtlepatterns/uploads/denim.png");
+  background-repeat: repeat;
+  color: #DDDDDD;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 0;
+}
+
+.sidebar {
+    width: 20%;
+    box-sizing: border-box;
+    border-right: 2px solid white;
+    padding-top: 30px;
+    padding-left: 5px;
+    a{
+        color: white;
+        text-decoration: none;
+        &:hover {
+            color: #EEFFFF;
+            font-weight: bold;
+        }
+    }
+}
+  
+.follower_lanking a{
+    text-shadow: 0 0 3px #DDDDDD,0 0 8px #DDDDDD;
+}
+
+#link_color{
+    color: black;
+    &:hover{
+        color:black;
+    }
+}
+  
+.content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    color:white;
+    h1{
+      color: #FF3366;
+      margin: 20px 0 30px 20px;
+      text-shadow: 0 0 3px red,0 0 8px red;
+    }
+    
+    h3{
+      color: #CC66FF;
+      padding-bottom:20px;
+      text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+    }
+}
+
+.post ul{
+    display: -webkit-flex;
+    display: flex;
+    list-style:none;
+    padding-left: 0;
+    margin-bottom: 0;
+    /*-webkit-justify-content: center;*/
+    /*justify-content: center;*/
+}
+
+.post li{
+    width:100%;
+    padding-left: 20px;
+    border-right:1px solid #DDDDDD;
+}
+
+/*chat*/
+.rank_chat{
+    margin: 20px 0;
+    a{
+        color: #DDDDDD;
+        text-decoration: none;
+        &:hover{
+            color: #EEFFFF;
+            font-weight: bold;
+        }
+    }
+}

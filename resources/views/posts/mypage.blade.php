@@ -5,96 +5,124 @@
     <head>
         <meta charset="utf-8">
         <title>chat</title>
+        <link rel="stylesheet" href="/css/userpage.css">
     </head>
     <body>
-        <h2 class="title">ログインユーザー：{{Auth::user()->name}}</h2>
-        
-        <br>
-        <h2 class="title">My Rank</h2>
-
-        
-        <div class="my_apexrank">
-                @foreach($apexes as $apex)
-                    <?php if(($apex->id)==(Auth::user()->apex_rank)): ?>
-                        <p>Apex Legends：{{$apex->rank}}</p>
-                    <?php else: ?>
-                    <?php endif; ?>
-                @endforeach
-            </div>
-            <div class="my_valorantrank">
-                @foreach($valorants as $valorant)
-                    <?php if(($valorant->id)==(Auth::user()->valorant_rank)): ?>
-                        <p>Valorant：{{$valorant->rank}}</p>
-                    <?php else: ?>
-                    <?php endif; ?>
-                @endforeach
-            </div>
-            <div class="my_pubgrank">
-                @foreach($pubgs as $pubg)
-                    <?php if(($pubg->id)==(Auth::user()->pubg_rank)): ?>
-                        <p>PUBG：{{$pubg->rank}}</p>
-                    <?php else: ?>
-                    <?php endif; ?>
-                @endforeach
-            </div>
-        <p>-----------------------------------------------------------------------</p>
-        <br>
-        
-        <div class="chatted">
-            
-            <h2 class="commented">過去のコメント一覧</h2>
-             @foreach ($comments as $comment) 
-                <div class="test">
-                    <?php if ($comment->user_id == Auth::user()->id) : ?>
-                        <p>コメント：{{$comment->body}}</p>
-                        <p>投稿日時：{{$comment->created_at}}</p>
-                        <p>更新日時：{{$comment->updated_at}}</p>
-                        <p class="edit">[<a href="/posts/{{$comment->id}}/edit">編集</a>]</p>
-                        
-                        <!--コメント削除-->
-                        <script type="text/javascript">
-                            function delete_alert(e){
-                               if(!window.confirm('本当に削除しますか？')){
-                                  window.alert('キャンセルされました'); 
-                                  return false;
-                               }
-                               document.deleteform.submit();
-                            };
-                        </script>
-                        
-                        <form action="/posts/{{$comment->id}}" id="form_{{$comment->id}}" method="POST" style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onClick="delete_alert(event);return false;">削除</button>
-                        </form>
-                        <p>-----------------------------------------------------------------------</p>
-                　　<?php else: ?>
-                　　<?php endif; ?>
+        <div class="userpage-body">
+            <div class="pasts userpage-flex">
+                <!--過去のコメント-->
+                <div class="chatteds">
+                    <h2 class="commented">過去のコメント一覧</h2>
+                     @foreach ($comments as $comment) 
+                        <div class="chatted">
+                            <?php if ($comment->user_id == Auth::user()->id) : ?>
+                                <div class="past-comment">
+                                    <p class="past-name">{{$comment->user->name}}</p>
+                                    <p>{{$comment->body}}</p>
+                                    <div class="edit-date">
+                                        <p>投稿：{{$comment->created_at}}</p>
+                                        <p>更新：{{$comment->updated_at}}</p>
+                                    </div>
+                                    <!--コメント編集・削除-->
+                                    <div class="comment-edit">
+                                        <div class="edit"><button class="btn btn-info"><a href="/posts/{{$comment->id}}/edit">編集</a></button></div>
+                                        <div class="comment-delete">
+                                            <script type="text/javascript">
+                                                function delete_alert(e){
+                                                   if(!window.confirm('本当に削除しますか？')){
+                                                      window.alert('キャンセルされました'); 
+                                                      return false;
+                                                   }
+                                                   document.deleteform.submit();
+                                                };
+                                            </script>
+                                            <form action="/posts/{{$comment->id}}" id="form_{{$comment->id}}" method="POST" style="display:inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onClick="delete_alert(event);return false;" class="btn btn-danger">削除</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        　　<?php else: ?>
+                        　　<?php endif; ?>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+                
+                <!--過去のリプライ-->
+                <div class="replieds">
+                    <h2 class="replied">過去のリプライ一覧</h2>
+                    @foreach ($replies as $reply) 
+                        <div class="replied">
+                            <?php if ($reply->user_id == Auth::user()->id) : ?>
+                                <div class="past-comment">
+                                    <p class="past-name">{{$reply->user->name}}</p>
+                                    <p>{{$reply->body}}</p>
+                                    <div class="edit-date">
+                                        <p>投稿：{{$reply->created_at}}</p>
+                                        <p>更新：{{$reply->updated_at}}</p>
+                                    </div>
+                                    <div class="comment-edit"> 
+                                        <div class="edit"><button class="btn btn-info"><a href="/posts/reply/{{$reply->id}}/edit">編集</a></button></div>
+                                        <div class="comment-delete"><form action="/posts/reply/{{$reply->id}}" id="form_{{$reply->id}}" method="POST" style="display:inline"></div>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onClick="delete_alert(event);return false;"  class="btn btn-danger">削除</button>
+                                        </form>
+                                    </div>
+                                </div>
+                        　　<?php else: ?>
+                        　　<?php endif; ?>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            
+             <!--右サイドバー-->
+            <div class="my-detail userpage-flex">
+                <h3 class="user-name">ユーザー<br>{{Auth::user()->name}}</h3>
+                <!--my_gamerank-->
+                <div class="my-rank">
+                    <h3 class="title">My GameRank</h3>
+                    <div class="my_apexrank">
+                            @foreach($apexes as $apex)
+                                <?php if((Auth::user()->apex_rank) == 100): ?>
+                                    <p>Apex Legends：unlanked</p>
+                                    @break
+                                <?php elseif(($apex->id)==(Auth::user()->apex_rank)): ?>
+                                    <p>Apex Legends：{{$apex->rank}}</p>
+                                <?php else: ?>
+                                <?php endif; ?>
+                            @endforeach
+                        </div>
+                    <div class="my_valorantrank">
+                        @foreach($valorants as $valorant)
+                            <?php if((Auth::user()->valorant_rank) == 100): ?>
+                                <p>Valorant：unlanked</p>
+                                @break
+                            <?php elseif(($valorant->id)==(Auth::user()->valorant_rank)): ?>
+                                <p>Valorant：{{$valorant->rank}}</p>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        @endforeach
+                    </div>
+                    <div class="my_pubgrank">
+                        @foreach($pubgs as $pubg)
+                            <?php if((Auth::user()->pubg_rank) == 100): ?>
+                                <p>PUBG：unlanked</p>
+                                @break
+                            <?php elseif(($pubg->id)==(Auth::user()->pubg_rank)): ?>
+                                <p>PUBG：{{$pubg->rank}}</p>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         
-        <h2 class="replied">過去のリプライ一覧</h2>
-             @foreach ($replies as $reply) 
-                <div class="test">
-                    <?php if ($reply->user_id == Auth::user()->id) : ?>
-                        <p>コメント：{{$reply->body}}</p>
-                        <p>投稿日時：{{$reply->created_at}}</p>
-                        <p>更新日時：{{$reply->updated_at}}</p>
-                        <p class="edit">[<a href="/posts/reply/{{$reply->id}}/edit">編集</a>]</p>
-                        
-                        <!--リプライ削除-->
-                        <form action="/posts/reply/{{$reply->id}}" id="form_{{$reply->id}}" method="POST" style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onClick="delete_alert(event);return false;">削除</button>
-                        </form>
-                        <p>-----------------------------------------------------------------------</p>
-                　　<?php else: ?>
-                　　<?php endif; ?>
-                </div>
-            @endforeach
-        <!--<a href='/create'>chat書き込み</a>-->
         <div class="footer">
             <a href="/">homeへ戻る</a>
         </div>

@@ -1,9 +1,9 @@
 <template>
-    <span>
-      <button v-if="!followed" type="button" class="btn btn-success" @click="follow()">フォロー</button>
-      <button  v-else type="button" class="btn btn-danger" @click="unfollow()">フォロー解除</button>
+    <div>
+      <button v-if="!followed" type="button" class="btn btn-info" @click="follow()">フォロー</button>
+      <button  v-else type="button" class="btn btn-info" @click="unfollow()">フォロー解除</button>
       <p>フォロワー：{{followCount}}人</p>
-    </span>
+    </div>
 </template>
 
 <script>

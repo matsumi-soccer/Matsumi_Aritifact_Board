@@ -18,18 +18,12 @@ Route::group(['middleware' => ['auth']], function(){
     //コメント,リプライ保存
     Route::post('/posts', 'PostController@store');
     Route::post('/posts_reply', 'PostController@store_reply');
-    
-    //フォロー機能
-    Route::post('/posts_follow', 'PostController@store_follow');
-    
-    //いいね機能
-    //Route::post('/posts_like', 'PostController@store_like');
-    
-    //newフォロー機能
+
+    //非同期フォロー機能
     Route::post('users/{user}/follow', 'FollowUserController@follow');
     Route::post('users/{user}/unfollow', 'FollowUserController@unfollow');
     
-    //newいいね機能
+    //非同期いいね機能
     Route::get('posts/{comment}/favorites', 'FavoriteController@store');
     Route::get('posts/{comment}/unfavorites', 'FavoriteController@destroy');
     Route::get('posts/{comment}/countfavorites', 'FavoriteController@count');
@@ -58,9 +52,6 @@ Route::group(['middleware' => ['auth']], function(){
     //コメント,リプライ削除,フォロー解除,いいね解除
     Route::delete('/posts/{comment}', 'PostController@delete');
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
-    Route::delete('/posts_follow/{follow}', 'PostController@follow_delete');
-    //Route::delete('/posts_like/{like}', 'PostController@like_delete');
-    
 });
 
 
