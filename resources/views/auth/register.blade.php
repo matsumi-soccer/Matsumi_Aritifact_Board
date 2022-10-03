@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header"  style=" color:black;">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -63,7 +63,7 @@
                         
                         <!--年齢 -->
                         <div class="form-group row">
-                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
+                            <label for="age" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Age') }}</label>
 
                             <div class="col-md-6">
                                 <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age" autofocus>
@@ -78,7 +78,7 @@
                         
                         <!--性別 -->
                         <div class="form-group row">
-                            <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
+                            <label for="sex" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Sex') }}</label>
 
                             <div class="col-md-6">
                                 <!--<input id="sex" type="text" class="form-control @error('sex') is-invalid @enderror" name="sex" value="{{ old('sex') }}" required autocomplete="sex" autofocus>-->
@@ -96,23 +96,23 @@
                         </div>
                         
                         <!--image画像 -->
-                        <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+                        <!--<div class="form-group row">-->
+                        <!--    <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>-->
 
-                            <div class="col-md-6">
-                                <input id="image" type="text" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
+                        <!--    <div class="col-md-6">-->
+                        <!--        <input id="image" type="file" class="form-control @error('profile_image') is-invalid @enderror" name="profile_image" value="{{ old('profile_image') }}" required autocomplete="image" autofocus>-->
 
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        <!--        @error('profile_image')-->
+                        <!--            <span class="invalid-feedback" role="alert">-->
+                        <!--                <strong>{{ $message }}</strong>-->
+                        <!--            </span>-->
+                        <!--        @enderror-->
+                        <!--    </div>-->
+                        <!--</div>-->
                         
                         <!--apexランク-->
                         <div class="form-group row">
-                            <label for="apex_rank" class="col-md-4 col-form-label text-md-right">{{ __('Apex_rank') }}</label>
+                            <label for="apex_rank" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Apex_rank') }}</label>
 
                             <div class="col-md-6">
                                 <!--<input id="apex_rank" type="text" class="form-control @error('apex_rank') is-invalid @enderror" name="apex_rank" value="{{ old('apex_rank') }}" required autocomplete="apex_rank" autofocus>-->
@@ -138,7 +138,7 @@
                         
                         <!--Valorantランク -->
                         <div class="form-group row">
-                            <label for="valorant_rank" class="col-md-4 col-form-label text-md-right">{{ __('Valorant_rank') }}</label>
+                            <label for="valorant_rank" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Valorant_rank') }}</label>
 
                             <div class="col-md-6">
                                 <!--<input id="valorant_rank" type="text" class="form-control @error('valorant_rank') is-invalid @enderror" name="valorant_rank" value="{{ old('valorant_rank') }}" required autocomplete="valorant_rank" autofocus>-->
@@ -165,7 +165,7 @@
                         
                         <!--PUBGランク -->
                         <div class="form-group row">
-                            <label for="pubg_rank" class="col-md-4 col-form-label text-md-right">{{ __('PUBG_rank') }}</label>
+                            <label for="pubg_rank" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('PUBG_rank') }}</label>
 
                             <div class="col-md-6">
                                 <!--<input id="pubg_rank" type="text" class="form-control @error('pubg_rank') is-invalid @enderror" name="pubg_rank" value="{{ old('pubg_rank') }}" required autocomplete="pubg_rank" autofocus>-->

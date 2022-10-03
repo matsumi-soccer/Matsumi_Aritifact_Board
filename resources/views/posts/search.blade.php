@@ -5,35 +5,43 @@
     <head>
         <meta charset="utf-8">
         <title>chat</title>
+        <link rel="stylesheet" href="/css/detail.css">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        
-        <p>User：{{Auth::user()->name}}</P>
-        <p class ="mypage"><a href="/posts/mypage">MyPage</a></p>
-        
-        <h2>検索結果</h2>
-        @foreach($comments as $comment)
-            <p>user：{{$comment->user->name}}</p>
-            <p>コメント：{{$comment->body}}</p>
-            <p>日時：{{$comment->updated_at}}</p>
-            <p>------</p>
-        @endforeach
-        @foreach($replies as $reply)
-            <p>user：{{$reply->user->name}}</p>
-            <p>リプライ：{{$reply->body}}</p>
-            <p>日時：{{$reply->updated_at}}</p>
-            <p>------</p>
-        @endforeach
-
-        
-        <div class='paginate'>
-            {{$comments->links()}}
-        </div>
-        
-         <div class="footer">
-            <a href="/">戻る</a>
+        <div class="search-body">
+            <div class="result-comment">
+               <h2>コメントの検索結果</h2>
+                @foreach($comments as $comment)
+                    <div class="content">
+                        <p class="padding-bottom name">{{$comment->user->name}}</p>
+                        <p class="padding-bottom">コメント：{{$comment->body}}</p>
+                        <p class="padding-bottom">{{$comment->updated_at}}</p>
+                    </div>
+                @endforeach
+                <div class='paginate'>
+                    {{$comments->links()}}
+                </div>
+            </div>
+            
+            <div class="result-reply">
+                <h2>リプライの検索結果</h2>
+                @foreach($replies as $reply)
+                    <div class="content">
+                        <p class="padding-bottom name">{{$reply->user->name}}</p>
+                        <p class="padding-bottom">リプライ：{{$reply->body}}</p>
+                        <p class="padding-bottom">{{$reply->updated_at}}</p>
+                    </div>
+                @endforeach
+                <div class='paginate'>
+                    {{$replies->links()}}
+                </div>
+            </div>
+            
+             <div class="footer">
+                <a href="/">homeへ戻る</a>
+            </div>
         </div>
     </body>
 </html>

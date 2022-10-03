@@ -1,16 +1,14 @@
 <template>
     <div class="container">
         <div class="mt-1">
-            <div class="col-md-8">
-                <div>
-                    <button @click="unfavorite()" class="btn btn-danger" v-if="result">
-                        いいね解除
-                    </button>
-                    <button @click="favorite()" class="btn btn-success"v-else>
-                        いいね
-                    </button>
-                    <p>いいね数：{{count}}件</p>
-                </div>
+            <div class="like-component">
+                <button @click="unfavorite()" class="btn btn-danger" v-if="result">
+                    いいね取り消し
+                </button>
+                <button @click="favorite()" class="btn btn-success"v-else>
+                    いいね
+                </button>
+                <p>「 いいね! 」 {{count}}件</p>
             </div>
         </div>
     </div>
@@ -66,3 +64,7 @@
         }
      }
 </script>
+
+<style>
+@import "/css/chat.css";
+</style>

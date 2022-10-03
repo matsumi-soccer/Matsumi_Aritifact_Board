@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CommentsUserTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('comments_user', function (Blueprint $table) {

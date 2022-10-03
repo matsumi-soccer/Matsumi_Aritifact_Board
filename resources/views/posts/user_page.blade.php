@@ -52,7 +52,7 @@
     
             <!--ゲームランク表示-->
             <div class='posts'>
-                <h2 class="title">Game Rank</h2>
+                <h3 class="title">Game Rank</h3>
                 
                 <div class="my_apexrank">
                     @foreach($apexes as $apex)
@@ -94,6 +94,11 @@
                 <a href="/">homeへ戻る</a>
             </div>
         </div>
+        
+        <!--sidebar-->
+        <!--<sidebar-component
+             :auth="{{json_encode(Auth::user())}}"
+        </sidebar-component>-->
         
     </body>
 </html>

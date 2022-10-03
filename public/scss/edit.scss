@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+
+
+
+//css記述
+body{
+  background-image:url("https://www.toptal.com/designers/subtlepatterns/uploads/denim.png");
+  background-repeat: repeat;
+  color: #DDDDDD;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+
+.edit-body{
+    width: 80%;
+    padding-left: 3em;
+    a{
+        color: #DDDDDD;
+        text-decoration: none;
+        &:hover {
+            color: #EEFFFF;
+            font-weight: bold;
+        }
+    }
+    h2{
+        color: #FF3366;
+        margin-bottom: 2em 0;
+        text-shadow: 0 0 3px red,0 0 8px red;
+    }
+    .content{
+        margin: 2em 0;
+    }
+    
+    .padding-bottom{
+    margin:0;
+    }
+    
+    .footer{
+        margin: 0 0.5em 0 0;
+    }
+}
+

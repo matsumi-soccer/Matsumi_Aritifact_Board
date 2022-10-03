@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Http\Requests\PostRequest;
@@ -22,24 +23,24 @@ use App\FollowUser;
 class PostController extends Controller
 {
     //ホーム画面
-    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows)
+    public function index(Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows, User $user)
     {
-        return view('posts/index')->with(['comments'=>$comment->getPaginateByLimit(), 'apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount()]);
+        return view('posts/index')->with(['apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount(), 'users'=> $user->get()]);
     }
     
     public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
     public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply, Like $like)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->get(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
     }
     
     //コメント作成
@@ -48,11 +49,29 @@ class PostController extends Controller
         return view('posts/create');
     }
     
-    //コメント保存
-    public function store(PostRequest $request, Comments $comment)
+    //コメント＆画像保存
+    public function store(Request $request, Comments $comment)
     {
-        $input = $request['comments'];
-        $comment->fill($input)->save();
+        $comment = new Comments;
+        $comment->user_id = $request['comments.user_id'];
+        $comment->game_id = $request['comments.game_id'];
+        $comment->body = $request['comments.body'];
+        $comment->save();
+        
+        //画像の保存
+        if($request['comments.profile_image'])
+        {
+            $file_name = $request['comments.profile_image']->getClientOriginalName();
+            DB::table('comments')
+            ->where('id', $comment->id)
+            ->update(['profile_image' => $file_name]);
+            if($request['comments.profile_image']->extension() == 'gif' || $request['comments.profile_image']->extension() == 'jpeg' || $request['comments.profile_image']->extension() == 'jpg' || $request['comments.profile_image']->extension() == 'png')
+            {
+                $img = $request['comments.profile_image']->storeAs('public/profiles', $file_name);
+                //$request->file('profile_image')->storeAs('public/profiles', $comment->id.'.'.$request->profile_image->extension());
+            }
+        }
+        
         return redirect()->back();
     }
     
@@ -74,15 +93,33 @@ class PostController extends Controller
     //コメント削除
     public function delete(Comments $comment)
     {
-        $comment->delete();
+        $comment->forceDelete();
         return redirect('/posts/mypage');
     }
     
     //リプライ保存
-    public function store_reply(ReplyRequest $request, Reply $reply)
+    public function store_reply(Request $request, Reply $reply)
     {
-        $input = $request['replies'];
-        $reply->fill($input)->save();
+        $reply = new Reply;
+        $reply->user_id = $request['replies.user_id'];
+        $reply->game_id = $request['replies.game_id'];
+        $reply->comment_id = $request['replies.comment_id'];
+        $reply->body = $request['replies.body'];
+        $reply->save();
+        
+        //画像の保存
+        if($request['replies.reply_image'])
+        {
+            $file_name = $request['replies.reply_image']->getClientOriginalName();
+            DB::table('replies')
+            ->where('id', $reply->id)
+            ->update(['reply_image' => $file_name]);
+            if($request['replies.reply_image']->extension() == 'gif' || $request['replies.reply_image']->extension() == 'jpeg' || $request['replies.reply_image']->extension() == 'jpg' || $request['replies.reply_image']->extension() == 'png')
+            {
+                $img = $request['replies.reply_image']->storeAs('public/profiles', $file_name);
+            }
+        }
+        
         return redirect()->back();
     }
     
@@ -104,7 +141,7 @@ class PostController extends Controller
     //リプライ削除
     public function reply_delete(Reply $reply)
     {
-        $reply->delete();
+        $reply->forceDelete();
         return redirect('/posts/mypage');
     }
     
@@ -202,6 +239,16 @@ class PostController extends Controller
         }
         
         return view('posts/search')->with(['comments' => $comments, 'replies' => $replies]);
+    }
+    
+    //画像アイコン登録
+    public function image_store(Request $request)
+    {
+        $path = $request->image->store('public/profiles');
+        $filename = basename($path);
+        $data = new FileImage;
+        $data->file_name = $filename;
+        $data->save();
     }
     
 }

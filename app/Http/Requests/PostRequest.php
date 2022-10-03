@@ -12,6 +12,7 @@ class PostRequest extends FormRequest
             'comments.user_id' => 'required',
             'comments.game_id' => 'required',
             'comments.body' => 'required|string|max:300',
+            'comments.profile_image' => 'max:2048',
         ];
     }
 }

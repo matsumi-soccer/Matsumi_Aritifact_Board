@@ -23,6 +23,9 @@
                                         <p>投稿：{{$comment->created_at}}</p>
                                         <p>更新：{{$comment->updated_at}}</p>
                                     </div>
+                                    <?php if($comment->profile_image != NULL) :?>
+                                        <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
+                                    <?php endif;?>
                                     <!--コメント編集・削除-->
                                     <div class="comment-edit">
                                         <div class="edit"><button class="btn btn-info"><a href="/posts/{{$comment->id}}/edit">編集</a></button></div>
@@ -63,13 +66,18 @@
                                         <p>投稿：{{$reply->created_at}}</p>
                                         <p>更新：{{$reply->updated_at}}</p>
                                     </div>
+                                    <?php if($reply->reply_image != NULL) :?>
+                                        <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
+                                    <?php endif;?>
                                     <div class="comment-edit"> 
                                         <div class="edit"><button class="btn btn-info"><a href="/posts/reply/{{$reply->id}}/edit">編集</a></button></div>
-                                        <div class="comment-delete"><form action="/posts/reply/{{$reply->id}}" id="form_{{$reply->id}}" method="POST" style="display:inline"></div>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onClick="delete_alert(event);return false;"  class="btn btn-danger">削除</button>
-                                        </form>
+                                        <div class="comment-delete">
+                                            <form action="/posts/reply/{{$reply->id}}" id="form_{{$reply->id}}" method="POST" style="display:inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onClick="delete_alert(event);return false;"  class="btn btn-danger">削除</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                         　　<?php else: ?>
@@ -81,10 +89,19 @@
             
              <!--右サイドバー-->
             <div class="my-detail userpage-flex">
-                <h3 class="user-name">ユーザー<br>{{Auth::user()->name}}</h3>
+                <div class="basic-profile">
+                    <h3 class="user-name">{{Auth::user()->name}}</h3>
+                    <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
+                    <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
+                      @csrf
+                        <input type="file" name="image">
+                        <input type="submit" value="アイコン変更">
+                    </form>
+                </div>
+                
                 <!--my_gamerank-->
                 <div class="my-rank">
-                    <h3 class="title">My GameRank</h3>
+                    <h3 class="title">GameRank</h3>
                     <div class="my_apexrank">
                             @foreach($apexes as $apex)
                                 <?php if((Auth::user()->apex_rank) == 100): ?>
