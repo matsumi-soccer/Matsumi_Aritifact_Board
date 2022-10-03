@@ -15,6 +15,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/create', 'PostController@create');
     Route::get('/posts/mypage', 'PostController@mypage');
     
+    //画像保存
+    Route::post('add_image', 'AddImageController@addImage')->name('add_image');
+    
     //コメント,リプライ保存
     Route::post('/posts', 'PostController@store');
     Route::post('/posts_reply', 'PostController@store_reply');
@@ -48,6 +51,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
     Route::get('/pubg/{pubg}', 'PostController@pubg_chat');
+    
+    //rankname探索
+    Route::get('/search/{apex}/apexrank_search', 'PostController@apexrank_search');
+    Route::get('/search/{valorant}/valorantrank_search', 'PostController@valorantrank_search');
+    Route::get('/search/{pubg}/pubgrank_search', 'PostController@pubgrank_search');
     
     //コメント,リプライ削除,フォロー解除,いいね解除
     Route::delete('/posts/{comment}', 'PostController@delete');

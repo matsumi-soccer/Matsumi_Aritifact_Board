@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+.header {
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/ep_naturalblack.png");
+  background-repeat: repeat;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+.header-name {
+  font-weight: bold;
+}

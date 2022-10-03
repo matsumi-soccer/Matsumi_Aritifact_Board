@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+
+body{
+  background-image:url("https://www.toptal.com/designers/subtlepatterns/uploads/denim.png");
+  background-repeat: repeat;
+  color: #DDDDDD;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+
+//LikeComponent
+.container{
+  button{
+  font-size: 80%;
+  padding: 0.2em 0.5em;
+  margin: 0.2em 0.1em;
+  }
+  p{
+    font-size: 80%;
+  }
+}
+
+//contenst
+.chat-body{
+    padding-left: 2em;
+    h2{
+        color: #FF3366;
+        margin: 0.6em;
+        text-shadow: 0 0 3px red,0 0 8px red;
+    }
+    h3{
+      margin: 1em 0;
+      color: #DDDDDD;
+      text-shadow: 0 0 2px #EEEEEE, 0 0 4px #EEEEEE;
+    }
+    h5{
+      color:  #DDDDDD;
+    }
+    a{
+        color:  #DDDDDD;
+        text-decoration: none;
+        font-size: 120%;
+        &:hover {
+            color: #EEFFFF;
+            font-weight: bold;
+        }
+    }
+}
+
+.contents-body{
+    padding: 2em;
+    width: 70%;
+}
+
+.rank-chat{
+    border-bottom:1px solid White;
+    padding-top: 0.5em;
+}
+
+//reply
+.wrap {
+  margin: 0;
+  padding: 0;
+  label{
+    font-size: 90%;
+    display: inline-block;
+    padding : 0.5em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0;
+    &:hover{
+      color: #EEFFFF;
+      font-weight: bold;
+    }
+  }
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+
+.reply-btn label{
+  padding: 0.15em;
+  color:#EEEEEE;
+  margin: 0.2em 0;
+}
+
+.rank-chat{
+  p{
+    margin-bottom: 0.3em;
+  }
+}
+
+.reply{
+    margin-bottom: 1em;
+}
+
+.wrap .reply-content {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 0px;
+  
+}
+
+.switch:checked + .reply-content {
+  height: auto;
+  padding: 1em;
+  border: 1px solid #DDDDDD;
+}
+
+.switch_reply:checked + .reply-content {
+  height: auto;
+  padding: 0.5em;
+  border: 1px solid #DDDDDD;
+}
+
+.like_button{
+  display: inline-block;
+  border: 0.1px solid;
+  border-radius: 2.5px;
+}
+
+.footer{
+  margin-top:2em;
+}

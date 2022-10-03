@@ -1,46 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+body {
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/denim.png");
+  background-repeat: repeat;
+  color: #ddd;
+  font-family: 'Noto Serif JP', sans-serif;
+}
+.container button {
+  font-size: 80%;
+  padding: 0.2em 0.5em;
+  margin: 0.2em 0.1em;
+}
+.container p {
+  font-size: 80%;
+}
+.chat-body {
+  padding-left: 2em;
+}
+.chat-body h2 {
+  color: #f36;
+  margin: 0.6em;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
+.chat-body h3 {
+  margin: 1em 0;
+  color: #ddd;
+  text-shadow: 0 0 2px #eee, 0 0 4px #eee;
+}
+.chat-body h5 {
+  color: #ddd;
+}
+.chat-body a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 120%;
+}
+.chat-body a:hover {
+  color: #eff;
+  font-weight: bold;
+}
+.contents-body {
+  padding: 2em;
+  width: 70%;
+}
+.rank-chat {
+  border-bottom: 1px solid White;
+  padding-top: 0.5em;
+}
 .wrap {
-  margin: 2em 0;
+  margin: 0;
   padding: 0;
 }
-
 .wrap label {
+  font-size: 90%;
   display: inline-block;
-  padding : 4px;
-  color: #fff;
+  padding : 0.5em;
   font-weight: bold;
-  background: black;
   cursor: pointer;
   margin-bottom: 0;
 }
-
-
-
+.wrap label:hover {
+  color: #eff;
+  font-weight: bold;
+}
 .wrap input[type="checkbox"] {
   display: none;
 }
-
-.wrap .content {
+.reply-btn label {
+  padding: 0.15em;
+  color: #eee;
+  margin: 0.2em 0;
+}
+.rank-chat p {
+  margin-bottom: 0.3em;
+}
+.reply {
+  margin-bottom: 1em;
+}
+.wrap .reply-content {
   height: 0;
   padding: 0;
   overflow: hidden;
   margin-bottom: 0px;
-  
 }
-
-.switch:checked + .content {
+.switch:checked + .reply-content {
   height: auto;
-  padding: 8px;
-  background: gray;
+  padding: 1em;
+  border: 1px solid #ddd;
 }
-
-.switch_reply:checked + .content {
+.switch_reply:checked + .reply-content {
   height: auto;
-  padding: 8px;
-  background: #C0C0C0;
+  padding: 0.5em;
+  border: 1px solid #ddd;
 }
-
-.like_button{
+.like_button {
   display: inline-block;
-  border:0.1px solid;
+  border: 0.1px solid;
   border-radius: 2.5px;
+}
+.footer {
+  margin-top: 2em;
 }

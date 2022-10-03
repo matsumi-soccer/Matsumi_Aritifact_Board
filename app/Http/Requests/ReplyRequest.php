@@ -14,6 +14,7 @@ class ReplyRequest extends FormRequest
             'replies.game_id' => 'required',
             'replies.comment_id' => 'required',
             'replies.body' => 'required|string|max:300',
+            'replies.reply_image' => 'max:2048',
         ];
     }
 }

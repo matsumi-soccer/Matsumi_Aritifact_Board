@@ -21,7 +21,7 @@ body{
 }
 
 .pasts{
-    width:80%;
+    width:75%;
     h2{
         color: #FF3366;
         margin:10px 0;
@@ -33,6 +33,7 @@ body{
 .past-comment{
     border-bottom:1px solid white;
     padding:30px 10px;
+    margin-right:2em;
 }
 
 .past-name{
@@ -79,12 +80,23 @@ body{
     padding:30px 0;
 }
 
-.my-details{
-    width:20%;
+.my-detail{
+    width:25%;
     box-sizing: border-box;
-    border: 1px solid black;
+    border-left: double 5px #BBFFFF;
     padding-top: 10px;
     padding-right: 5px;
+    padding-left: 1em;
+    .basic-profile img{
+        border-radius:50%;
+    }
+    .my-rank{
+        margin-top:1.5em;
+    }
+    .my-rank h3{
+        color: #CC66FF;
+        text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+    }
 }
 
 .footer{
@@ -92,6 +104,10 @@ body{
     a{
         color:	#EEEEEE;
         text-decoration: none;
+         &:hover{
+            color: #EEFFFF;
+            font-weight: bold;
+        }
     }
 }
 
@@ -104,10 +120,15 @@ body{
         margin: 0.5em 0;
         text-shadow: 0 0 3px red,0 0 8px red;
     }
-    &.follow-vue{
+    h3{
+        margin: 0.5em 0;
+        color: #CC66FF;
+        text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+    }
+    .follow-vue{
         padding-left:5em;
     }
-    &.footer{
+    .footer{
         padding-left:0;
     }
     

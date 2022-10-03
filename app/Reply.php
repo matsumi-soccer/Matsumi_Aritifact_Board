@@ -14,6 +14,7 @@ class Reply extends Model
         'game_id',
         'comment_id',
         'body',
+        'reply_image',
     ];
     
     public function getPaginateByLimit(int $limit_count=20)
