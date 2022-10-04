@@ -22,7 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('like-component', require('./components/LikeComponent.vue').default);
 Vue.component('follow-component', require('./components/FollowComponent.vue').default);
-Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
+Vue.component('follow-components', require('./components/FollowComponents.vue').default);
 
 
 
