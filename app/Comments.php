@@ -17,18 +17,6 @@ class Comments extends Model
         'profile_image',
     ];
     
-    // public function getByLimit(int $limit_count = 20)
-    // {
-    //     return $this->orderBy('updated_at', 'DESC')->limit($limit_count)->get();
-    // }
-    
-    //ページネーション
-    // public function getPaginateByLimit(int $limit_count=5)
-    // {
-    //     //return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
-    //     return $this::with('user')->orderBy('created_at', 'DESC')->paginate($limit_count);
-    // }
-    
     public function getPagenate(int $limit_count=50)
     {
          return $this->orderBy('created_at', 'DESC')->paginate($limit_count);

@@ -20,7 +20,7 @@
                 <!--検索機能-->
                 <div class="search">
                     <form method="GET" action="/search">
-                        <input type="search" placeholder="キーワードを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" style="width:90%;">
+                        <input type="search" placeholder="キーワードを入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
                         <div>
                             <table>
                                 <tr>
@@ -39,9 +39,9 @@
                     <div class="follower_top">
                         <?php $count_rank=1?>
                         @foreach($follows as $follow)
-                            @foreach($users as $user)
-                                <?php if (($user->id) == ($follow->followed_user_id)) : ?>
-                                    <a href="/posts_userpage/{{$user->id}}">{{$count_rank}}位：{{$user->name}}</a>
+                            @foreach($comments as $comment)
+                                <?php if (($comment->user->id) == ($follow->followed_user_id)) : ?>
+                                    <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}}位：{{$comment->user->name}}</a>
                                     @break
                                 <?php else: ?>
                                     @continue
@@ -51,8 +51,6 @@
                             <?php $count_rank+=1 ?>
                         @endforeach
                     </div>
-                    
-                    
                 </div>
             </div>
             

@@ -40,19 +40,16 @@
                 
                 <!--follow-vue-->
                 <div class="follow-vue">
-                        <follow-component
-                            :user = "{{ json_encode($comment->user) }}"
-                            :default-Followed = "{{ json_encode($defaultFollowed) }}"
-                            :default-Count = "{{ json_encode($defaultCount) }}"
-                        ></follow-component>
+                    <follow-component
+                        :user = "{{ json_encode($comment->user) }}"
+                        :default-Followed = "{{ json_encode($defaultFollowed) }}"
+                        :default-Count = "{{ json_encode($defaultCount) }}"
+                    ></follow-component>
                 </div>
-                
             </div>
-            
-    
             <!--ゲームランク表示-->
             <div class='posts'>
-                <h3 class="title">Game Rank</h3>
+                <h2 class="title">Game Rank</h2>
                 
                 <div class="my_apexrank">
                     @foreach($apexes as $apex)
@@ -88,17 +85,28 @@
                     @endforeach
                 </div>
             </div>
+            
+            <!--steam API-->
+            <div class="steam-news">
+                <?php $news_count = 1; ?>
+
+                @foreach($newses as $news)
+                    <!--news最新5件表示-->
+                    <p>最新ニュース</p>
+                    <?php if($news_count <= 5):?>
+                        <p>{{$news['title']}}　日時：{{ date('Y/m/d', $news['date']) }}</p>
+                        <a href = "{{$news['url']}}">{{$news['url']}}</a>
+                        <?php $news_count += 1; ?>
+                    <?php endif; ?>
+                @endforeach
+            </div>
            
             <!--<a href='/create'>chat書き込み</a>-->
             <div class="footer">
                 <a href="/">homeへ戻る</a>
             </div>
         </div>
-        
-        <!--sidebar-->
-        <!--<sidebar-component
-             :auth="{{json_encode(Auth::user())}}"
-        </sidebar-component>-->
+
         
     </body>
 </html>

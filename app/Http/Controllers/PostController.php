@@ -23,9 +23,9 @@ use App\FollowUser;
 class PostController extends Controller
 {
     //ホーム画面
-    public function index(Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows, User $user)
+    public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows, User $user)
     {
-        return view('posts/index')->with(['apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount(), 'users'=> $user->get()]);
+        return view('posts/index')->with(['comments'=>$comment->get(), 'apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount(), 'users'=> $user->get()]);
     }
     
     public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Like $like)
@@ -93,7 +93,7 @@ class PostController extends Controller
     //コメント削除
     public function delete(Comments $comment)
     {
-        $comment->forceDelete();
+        $comment->delete();
         return redirect('/posts/mypage');
     }
     
@@ -141,7 +141,7 @@ class PostController extends Controller
     //リプライ削除
     public function reply_delete(Reply $reply)
     {
-        $reply->forceDelete();
+        $reply->delete();
         return redirect('/posts/mypage');
     }
     
@@ -184,12 +184,25 @@ class PostController extends Controller
     //ユーザーページ画面
     public function userpage(Comments $comment, Follow $follow, Apex $apex, Valorant $valorant, Pubg $pubg)
     {
+        $client = new \GuzzleHttp\Client();
+        //$url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=292120&format=json';
+        $url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1172470&format=json';
+
+        $response = $client->request(
+            'GET',
+            $url,
+            ['Bearer' => config('services.steam.token')]
+        );
+        
+        $news = json_decode($response->getBody(), true);
+        
         return view('posts/user_page')->with([
             'comment' => $comment, 
-            'follows' => $follow->get(), 
             'apexes' => $apex->get(), 
             'valorants'=> $valorant->get(), 
             'pubgs'=>$pubg->get(),
+            'newses' => $news['appnews']['newsitems'],
+            //'news_body' => $response['authror'],
         ]);
     }
 
