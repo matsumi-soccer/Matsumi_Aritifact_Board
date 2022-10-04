@@ -7,7 +7,7 @@ Sophisticated game board
 なので、掲示板内のグループによって投稿できる権限が異なる機能を持つ掲示板作成しました。
  
 # HOME画面
-![Alt text](C:\Users\yuga matsumi\Pictures.GameBoard\GameBoard.PNG)
+<img width="940" alt="GameBoard" src="https://user-images.githubusercontent.com/85006242/193772778-5ced7385-f651-4c42-9c0f-ad24d142799e.PNG">
  
 # 機能
 ・コメント,リプライ機能(画像添付〇)
@@ -22,6 +22,3 @@ Sophisticated game board
 * my12947mg@outlook.jp
 
 # URL
-
- 
-
