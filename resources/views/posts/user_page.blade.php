@@ -89,13 +89,12 @@
             <!--steam API-->
             <div class="steam-news">
                 <?php $news_count = 1; ?>
-
+                <p>最新ニュース</p>
                 @foreach($newses as $news)
                     <!--news最新5件表示-->
-                    <p>最新ニュース</p>
                     <?php if($news_count <= 5):?>
                         <p>{{$news['title']}}　日時：{{ date('Y/m/d', $news['date']) }}</p>
-                        <a href = "{{$news['url']}}">{{$news['url']}}</a>
+                        <a href = "{{$news['url']}}">{{$news['url']}}</a><br><br><br>
                         <?php $news_count += 1; ?>
                     <?php endif; ?>
                 @endforeach
