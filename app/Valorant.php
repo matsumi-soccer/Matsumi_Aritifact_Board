@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Valorant extends Model
 {
-     public function users()
+    public $timestamps = false;
+    public function users()
     {
         return $this->hasMany('App\User');
     }
