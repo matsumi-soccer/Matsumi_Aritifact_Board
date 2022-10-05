@@ -15,4 +15,5 @@ class DatabaseSeeder extends Seeder
        $this->call(ValorantsTableSeeder::class); 
        $this->call(PubgsTableSeeder::class); 
     }
+    
 }
