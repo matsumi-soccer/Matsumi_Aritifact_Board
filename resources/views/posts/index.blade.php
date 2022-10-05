@@ -55,7 +55,7 @@
             </div>
             
             <div class="content">
-                <h1>Game掲示板</h1>
+                <h1>Sophisticated Game Board</h1>
                 <div class='posts'>
                     <div class='post'>
                         <ul>
