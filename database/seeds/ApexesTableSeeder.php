@@ -49,13 +49,5 @@ class ApexesTableSeeder extends Seeder
             'id' => '9',
             'rank' => 'free',
         ]);
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }

@@ -128,6 +128,7 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
+                                
                             <!--freechat以外-->
                             <?php elseif (($comment->game_id == 1) &&  (($comment->user->apex_rank) <= ($apex->id))): ?>
                                 <div class="rank-chat">

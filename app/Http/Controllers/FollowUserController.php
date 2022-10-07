@@ -9,6 +9,7 @@ use App\Auth;
 
 class FollowUserController extends Controller
 {
+    //フォロー
     public function follow($userId) {
         $follow = FollowUser::create([
             'following_user_id' => \Auth::user()->id,
@@ -18,6 +19,7 @@ class FollowUserController extends Controller
         return response()->json(['followCount' => $followCount]);
     }
 
+    //フォロー解除
     public function unfollow($userId) {
         $follow = FollowUser::where('following_user_id', \Auth::user()->id)->where('followed_user_id', $userId)->first();
         $follow->delete();

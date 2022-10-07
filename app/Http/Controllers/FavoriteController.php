@@ -9,8 +9,7 @@ use Auth;
 
 class FavoriteController extends Controller
 {
-
-    
+    //いいね保存
     public function store($id)
     {
         $comment = Comments::find($id);
@@ -23,6 +22,7 @@ class FavoriteController extends Controller
         ]);
     }
     
+    //いいね解除
     public function destroy($id)
     {
         $comment = Comments::find($id);
@@ -35,6 +35,7 @@ class FavoriteController extends Controller
         ]);
     }
     
+    //いいねjudge
     public function hasfavorite($id)
     {
         $comment = Comments::find($id);
@@ -43,15 +44,14 @@ class FavoriteController extends Controller
         } else {
             $result = false;
         }
-        
         return response()->json($result);
     }
     
+    //いいね数カウント
     public function count($id)
     {
         $comment = Comments::find($id);
         $count = $comment->users()->count();
-        
         return response()->json($count);
     }
 }

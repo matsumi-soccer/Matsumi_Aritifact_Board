@@ -25,22 +25,48 @@ class PostController extends Controller
     //ホーム画面
     public function index(Comments $comment, Apex $apex, Valorant $valorant, Pubg $pubg, FollowUser $follows, User $user)
     {
-        return view('posts/index')->with(['comments'=>$comment->get(), 'apex'=>$apex->select('id', 'rank')->get(), 'valorant'=>$valorant->select('id', 'rank')->get(), 'pubg'=>$pubg->select('id', 'rank')->get(), 'follows'=>$follows->getCountAmount(), 'users'=> $user->get()]);
+        return view('posts/index')->with([
+            'comments'=>$comment->get(),
+            'apex'=>$apex->select('id', 'rank')->get(),
+            'valorant'=>$valorant->select('id', 'rank')->get(),
+            'pubg'=>$pubg->select('id', 'rank')->get(),
+            'follows'=>$follows->getCountAmount(),
+            'users'=> $user->get()
+        ]);
     }
     
+    //chatページ
     public function apex_chat(Apex $apex, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/apex_chat')->with(['apex' => $apex, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        $comment = Comments::where('game_id', '=', 1);
+        return view('posts/apex_chat')->with([
+            'apex' => $apex,
+            'comments' => $comment->orderBy('created_at', 'desc')->paginate(10),
+            'replies' => $reply->get(),
+            'likes' => $like->get()
+        ]);
     }
     
     public function valorant_chat(Valorant $valorant, Comments $comment, Reply $reply, Like $like)
     {
-        return view('posts/valorant_chat')->with(['valorant' => $valorant, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        $comment = Comments::where('game_id', '=', 2);
+        return view('posts/valorant_chat')->with([
+            'valorant' => $valorant,
+            'comments' => $comment->orderBy('created_at', 'desc')->paginate(10),
+            'replies' => $reply->get(),
+            'likes' => $like->get()
+        ]);
     }
     
     public function pubg_chat(Pubg $pubg, Comments $comment,  Reply $reply, Like $like)
     {
-        return view('posts/pubg_chat')->with(['pubg' => $pubg, 'comments' => $comment->getPagenate(), 'replies' => $reply->get(), 'likes' => $like->get()]);
+        $comment = Comments::where('game_id', '=', 3);
+        return view('posts/pubg_chat')->with([
+            'pubg' => $pubg,
+            'comments' => $comment->orderBy('created_at', 'desc')->paginate(10),
+            'replies' => $reply->get(),
+            'likes' => $like->get()
+        ]);
     }
     
     //コメント作成
@@ -68,14 +94,12 @@ class PostController extends Controller
             if($request['comments.profile_image']->extension() == 'gif' || $request['comments.profile_image']->extension() == 'jpeg' || $request['comments.profile_image']->extension() == 'jpg' || $request['comments.profile_image']->extension() == 'png')
             {
                 $img = $request['comments.profile_image']->storeAs('public/profiles', $file_name);
-                //$request->file('profile_image')->storeAs('public/profiles', $comment->id.'.'.$request->profile_image->extension());
             }
         }
-        
         return redirect()->back();
     }
     
-    //コメント編集
+    //コメント編集画面
     public function edit(Comments $comment)
     {
         return view('posts/edit')->with(['comment' => $comment]);
@@ -148,7 +172,13 @@ class PostController extends Controller
     //マイページ画面
     public function mypage(Comments $comment, Reply $reply,Apex $apex, Valorant $valorant, Pubg $pubg)
     {
-        return view('posts/mypage')->with(['comments' => $comment->get(), 'replies' => $reply->get(),'apexes' => $apex->get(), 'valorants'=> $valorant->get(), 'pubgs'=>$pubg->get()]);
+        return view('posts/mypage')->with([
+            'comments' => $comment->get(),
+            'replies' => $reply->get(),
+            'apexes' => $apex->get(),
+            'valorants'=> $valorant->get(),
+            'pubgs'=>$pubg->get()
+        ]);
     }
     
     //フォロー保存
@@ -185,31 +215,42 @@ class PostController extends Controller
     public function userpage(Comments $comment, Follow $follow, Apex $apex, Valorant $valorant, Pubg $pubg)
     {
         $client = new \GuzzleHttp\Client();
-        //$url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=292120&format=json';
-        $url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1172470&format=json';
+        $apex_url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1172470&format=json';
+        $pubg_url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=578080&format=json';
 
-        $response = $client->request(
+        $apex_response = $client->request(
             'GET',
-            $url,
+            $apex_url,
             ['Bearer' => config('services.steam.token')]
         );
+        $apex_news = json_decode($apex_response->getBody(), true);
+        $pubg_response = $client->request(
+            'GET',
+            $pubg_url,
+            ['Bearer' => config('services.steam.token')]
+        );
+        $pubg_news = json_decode($pubg_response->getBody(), true);
         
-        $news = json_decode($response->getBody(), true);
+        $latest_comment = Comments::where('user_id', '=', $comment->user_id);
         
         return view('posts/user_page')->with([
             'comment' => $comment, 
+            'latest_comments' => $latest_comment->orderBy('created_at', 'desc')->paginate(3),
             'apexes' => $apex->get(), 
             'valorants'=> $valorant->get(), 
             'pubgs'=>$pubg->get(),
-            'newses' => $news['appnews']['newsitems'],
-            //'news_body' => $response['authror'],
+            'apex_newses' => $apex_news['appnews']['newsitems'],
+            'pubg_newses' => $pubg_news['appnews']['newsitems'],
         ]);
     }
 
     //followerランキング画面
     public function follower_lanking(Comments $comment, FollowUser $followuser)
     {
-         return view('posts/follower_lanking')->with(['comments' => $comment->get(), 'follows' => $followuser->getAllCountAmount()]);
+         return view('posts/follower_lanking')->with([
+             'comments' => $comment->get(),
+             'follows' => $followuser->getAllCountAmount()
+        ]);
     }
     
     //キーワード検索画面
@@ -222,14 +263,11 @@ class PostController extends Controller
         if($search_comment)
         {
             $spaceConversion = mb_convert_kana($search_comment, 's');
-            
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            
             foreach($wordArraySearched as $value)
             {
                 $query->where('body', 'like', '%'.$value.'%');
             }
-            
             $comments=$query->paginate(10);
         }
         
@@ -240,18 +278,16 @@ class PostController extends Controller
         if($search_reply)
         {
             $spaceConversion_reply = mb_convert_kana($search_reply, 's');
-            
             $wordArraySearched_reply = preg_split('/[\s,]+/', $spaceConversion_reply, -1, PREG_SPLIT_NO_EMPTY);
-            
             foreach($wordArraySearched_reply as $value)
             {
                 $query_reply->where('body', 'like', '%'.$value.'%');
             }
-            
             $replies=$query->paginate(10);
         }
-        
-        return view('posts/search')->with(['comments' => $comments, 'replies' => $replies]);
+        return view('posts/search')->with([
+            'comments' => $comments,
+            'replies' => $replies]);
     }
     
     //画像アイコン登録

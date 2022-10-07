@@ -4,6 +4,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>chat</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -16,6 +17,7 @@
     </head>
     <body>
         <div class="main">
+            <!--左サイドバー-->
             <div class="sidebar">
                 <!--検索機能-->
                 <div class="search">
@@ -54,6 +56,7 @@
                 </div>
             </div>
             
+            <!--掲示板-->
             <div class="content">
                 <h1>Sophisticated Game Board</h1>
                 <div class='posts'>

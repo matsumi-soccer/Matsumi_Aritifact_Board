@@ -17,7 +17,7 @@ class Comments extends Model
         'profile_image',
     ];
     
-    public function getPagenate(int $limit_count=50)
+    public function getPagenate(int $limit_count=5)
     {
          return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
     }

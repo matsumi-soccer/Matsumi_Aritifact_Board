@@ -94,25 +94,48 @@ body {
   color: #eff;
   font-weight: bold;
 }
-.user-detail {
-  padding: 0 1em;
+.content {
+  display: flex;
 }
-.user-detail h2 {
+.content .user-detail {
+  width: 65%;
+  padding: 0 1em;
+  display: flex;
+}
+.content .user-detail h2 {
   color: #f36;
   margin: 0.5em 0;
   text-shadow: 0 0 3px red, 0 0 8px red;
 }
-.user-detail h3 {
+.content .user-detail h3 {
   margin: 0.5em 0;
   color: #c6f;
   text-shadow: 0 0 3px #c0c, 0 0 8px #c0c;
 }
-.user-detail .follow-vue {
-  padding-left: 5em;
-}
-.user-detail .footer {
+.content .user-detail .footer {
   padding-left: 0;
 }
-.steam-news {
-  width: 70%;
+.content .user-detail .detail-left {
+  width: 50%;
+}
+.content .user-detail .detail-right {
+  width: 50%;
+}
+.content .steam-news {
+  border-left: 1px solid #ddd;
+  width: 35%;
+  padding: 1em;
+}
+.content .steam-news .news a {
+  color: #ddd;
+  text-decoration: none;
+}
+.content .steam-news .news a:hover {
+  color: #eff;
+  font-weight: bold;
+}
+.content .steam-news h3 {
+  margin: 0.5em 0;
+  color: #0ff;
+  text-shadow: 0 0 3px #00f, 0 0 8px #00f;
 }

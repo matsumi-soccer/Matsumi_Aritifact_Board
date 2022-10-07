@@ -113,27 +113,50 @@ body{
 
 
 //userpage
-.user-detail{
-    padding:0 1em;
-    h2{
-        color: #FF3366;
-        margin: 0.5em 0;
-        text-shadow: 0 0 3px red,0 0 8px red;
+.content{
+    display:flex;
+    .user-detail{
+        width:65%;
+        padding:0 1em;
+        display:flex;
+        h2{
+            color: #FF3366;
+            margin: 0.5em 0;
+            text-shadow: 0 0 3px red,0 0 8px red;
+        }
+        h3{
+            margin: 0.5em 0;
+            color: #CC66FF;
+            text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+        }
+        .footer{
+            padding-left:0;
+        }
+        .detail-left{
+            width:50%;
+        }
+        .detail-right{
+            width:50%;
+        }
     }
-    h3{
-        margin: 0.5em 0;
-        color: #CC66FF;
-        text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+    .steam-news{
+        border-left:1px solid #DDDDDD;
+        width:35%;
+        padding:1em;
+        .news{
+            a{
+                color:  #DDDDDD;
+                text-decoration: none;
+                &:hover {
+                    color: #EEFFFF;
+                    font-weight: bold;
+                }
+            }
+        }
+        h3{
+            margin: 0.5em 0;
+            color: #00FFFF;
+            text-shadow: 0 0 3px #0000FF,0 0 8px #0000FF;
+        }
     }
-    .follow-vue{
-        padding-left:5em;
-    }
-    .footer{
-        padding-left:0;
-    }
-    
-}
-
-.steam-news{
-    width:70%;
 }

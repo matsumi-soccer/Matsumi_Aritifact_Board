@@ -62,7 +62,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
 });
 
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 ?>
