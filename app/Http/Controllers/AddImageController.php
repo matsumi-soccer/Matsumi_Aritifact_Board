@@ -36,7 +36,7 @@ class AddImageController extends Controller
         }else{
             # 本番環境
             $image = $request->image->getClientOriginalName();
-            $path = Storage::disk('s3')->put('/', $image, 'public');
+            $path = Storage::disk('s3')->put('/public', $image, 'public');
             $post->image = Storage::disk('s3')->url($path);
             DB::table('users')
                 ->where('id', \Auth::user()->id)
