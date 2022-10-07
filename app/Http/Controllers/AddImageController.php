@@ -33,11 +33,12 @@ class AddImageController extends Controller
             DB::table('users')
                 ->where('id', \Auth::user()->id)
                 ->update(['profile_image' => $file_name]);
+            $url='url';
         }else{
             # 本番環境
             $image = $request->image->getClientOriginalName();
             $path = Storage::disk('s3')->put('/public', $image, 'public');
-            //$request->image = Storage::disk('s3')->url($path);
+            $url->image = Storage::disk('s3')->url($path);
             DB::table('users')
                 ->where('id', \Auth::user()->id)
                 ->update(['profile_image' => $image]);
@@ -47,6 +48,7 @@ class AddImageController extends Controller
 
         $file_path = \DB::table('users')->where('id',\Auth::user()->id)->first();
         return redirect()->back();
+
     }
 
 }
