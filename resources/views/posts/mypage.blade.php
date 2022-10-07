@@ -93,7 +93,11 @@
                 <div class="basic-profile">
                     <h3 class="user-name">{{Auth::user()->name}}</h3>
                     <p>{{Auth::user()->profile_image}}</p>
-                    <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
+                    <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                        <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
+                    <?php else:?>
+                        <img src="{{ Storage::disk('s3')->url('public/' .Auth::user()->profile_image) }}"　alt="プロフィール画像"　width="150" height="150">
+                    <?php endif;?>
                     <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
                       @csrf
                         <input type="file" name="image">
