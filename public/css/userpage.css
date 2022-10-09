@@ -136,7 +136,7 @@ body {
   padding: 0 1em;
   display: flex;
 }
-.content .user-detail img {
+.content .user-detail .user-icon img {
   border-radius: 50%;
   margin: 0.5em 0;
 }

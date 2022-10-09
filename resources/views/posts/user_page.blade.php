@@ -109,6 +109,13 @@
                     @foreach($latest_comments as $latest)
                         <p>{{$latest->body}}</p>
                         <p>日時：{{$latest->created_at}}</p>
+                        <?php if($latest->profile_image != NULL) :?>
+                            <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                                <img src = "{{asset('storage/profiles/'.$latest->profile_image)}}" alt="画像" width="150" height="150">
+                            <?php else:?>
+                                <img src="{{$latest->profile_image}}"　alt="画像"　width="150" height="150">
+                            <?php endif;?>
+                        <?php endif;?>
                     @endforeach
                 </div>
             </div>
