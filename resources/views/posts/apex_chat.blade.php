@@ -155,7 +155,7 @@
                                         <?php else:?>
                                             <p>本番</p>
                                             <p>{{$comment->profile_image}}</p>
-                                            <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
+                                            <img src="{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
                                         <?php endif;?>
                                     <?php endif;?>
                                     
