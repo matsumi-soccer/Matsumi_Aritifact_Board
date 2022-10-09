@@ -38,19 +38,19 @@ body {
   color: #eff;
   font-weight: bold;
 }
-.contents-body {
+.chat-body .contents-body {
   padding: 2em;
   width: 70%;
 }
-.rank-chat {
+.chat-body .contents-body .rank-chat {
   border-bottom: 1px solid White;
   padding-top: 0.5em;
 }
-.wrap {
+.chat-body .contents-body .wrap {
   margin: 0;
   padding: 0;
 }
-.wrap label {
+.chat-body .contents-body .wrap label {
   font-size: 90%;
   display: inline-block;
   padding : 0.5em;
@@ -58,11 +58,11 @@ body {
   cursor: pointer;
   margin-bottom: 0;
 }
-.wrap label:hover {
+.chat-body .contents-body .wrap label:hover {
   color: #eff;
   font-weight: bold;
 }
-.wrap input[type="checkbox"] {
+.chat-body .contents-body .wrap input[type="checkbox"] {
   display: none;
 }
 .reply-btn label {
@@ -99,4 +99,37 @@ body {
 }
 .footer {
   margin-top: 2em;
+}
+@media screen and (max-width: 500px) {
+  .chat-body {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .chat-body textarea {
+    width: 95%;
+  }
+  .chat-body h2 {
+    font-size: 150%;
+    margin: 0;
+  }
+  .chat-body h3 {
+    font-size: 130%;
+  }
+  .chat-body .contents-body {
+    padding: 0;
+    width: 100%;
+  }
+  .chat-body .contents-body img {
+    width: 100px;
+    height: 100px;
+  }
+  .chat-body .contents-body .wrap {
+    width: 95%;
+  }
+  .chat-body .contents-body .wrap .reply-content {
+    margin-right: 1ema;
+  }
+  .chat-body .contents-body .switch_reply:checked + .reply-content {
+    padding: 0.5em;
+  }
 }

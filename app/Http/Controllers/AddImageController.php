@@ -10,23 +10,9 @@ use App\Auth;
 
 class AddImageController extends Controller
 {
-    //開発環境only
-    // public function addImage(Request $request)
-    // {
-    //     //Userのプロフィール画像変更
-    //     $file_name = $request->image->getClientOriginalName();
-    //     $img = $request->image->storeAs('public/profiles', $file_name);
-    //     DB::table('users')
-    //         ->where('id', \Auth::user()->id)
-    //         ->update(['profile_image' => $file_name]);
-
-    //     $file_path = \DB::table('users')->where('id',\Auth::user()->id)->first();
-    //     return redirect()->back();
-    // }
-    
     public function addImage(Request $request)
     {
-        //Userのプロフィール画像変更
+        //開発環境
         if( app()->isLocal()|| app()->runningUnitTests())
         {
             $file_name = $request->image->getClientOriginalName();
@@ -38,7 +24,7 @@ class AddImageController extends Controller
             $file_path = \DB::table('users')->where('id',\Auth::user()->id)->first();
             return redirect()->back();
         }else{
-            # 本番環境
+            //本番環境
             $file_name = $request->image;
             Storage::disk('s3')->delete($file_name);
             $path = Storage::disk('s3')->putFile('/', $file_name, 'public');

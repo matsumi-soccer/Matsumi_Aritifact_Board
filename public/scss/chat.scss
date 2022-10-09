@@ -44,37 +44,34 @@ body{
             font-weight: bold;
         }
     }
-}
-
-.contents-body{
-    padding: 2em;
-    width: 70%;
-}
-
-.rank-chat{
-    border-bottom:1px solid White;
-    padding-top: 0.5em;
-}
-
-//reply
-.wrap {
-  margin: 0;
-  padding: 0;
-  label{
-    font-size: 90%;
-    display: inline-block;
-    padding : 0.5em;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 0;
-    &:hover{
-      color: #EEFFFF;
-      font-weight: bold;
+    .contents-body{
+        padding: 2em;
+        width: 70%;
+        .rank-chat{
+            border-bottom:1px solid White;
+            padding-top: 0.5em;
+        }
+        //reply
+        .wrap {
+          margin: 0;
+          padding: 0;
+          label{
+            font-size: 90%;
+            display: inline-block;
+            padding : 0.5em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 0;
+            &:hover{
+              color: #EEFFFF;
+              font-weight: bold;
+            }
+          }
+          input[type="checkbox"] {
+            display: none;
+          }
+        }
     }
-  }
-  input[type="checkbox"] {
-    display: none;
-  }
 }
 
 .reply-btn label{
@@ -121,4 +118,38 @@ body{
 
 .footer{
   margin-top:2em;
+}
+
+@media screen and (max-width: 500px){
+  .chat-body{
+    padding-left:1em;
+    padding-right:1em;
+    textarea {
+      width:95%;
+    }
+    h2{
+        font-size: 150%;
+        margin:0;
+    }
+    h3{
+      font-size:130%;
+    }
+    .contents-body{
+      padding:0;
+      width:100%;
+      img{
+        width:100px;
+        height:100px;
+      } 
+      .wrap {
+        width:95%;
+        .reply-content{
+          margin-right:1ema;
+        }
+      }
+      .switch_reply:checked + .reply-content {
+        padding:0.5em;
+      }
+    }
+  }
 }

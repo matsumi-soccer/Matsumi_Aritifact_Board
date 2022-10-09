@@ -31,3 +31,15 @@ body {
 .edit-body .footer {
   margin: 0 0.5em 0 0;
 }
+@media screen and (max-width: 520px) {
+  .edit-body {
+    width: 100%;
+    padding-left: 0.5em;
+  }
+  .edit-body textarea {
+    width: 80%;
+  }
+  .edit-body h2 {
+    font-size: 150%;
+  }
+}

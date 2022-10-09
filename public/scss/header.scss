@@ -9,3 +9,9 @@
 .header-name{
     font-weight:bold;
 }
+
+@media screen and (max-width: 768px){
+.navbar-light .navbar-toggler-icon{
+  background-image: url("https://cdn.icon-icons.com/icons2/3468/PNG/512/ui_interface_navigation_list_menu_icon_219797.png");
+}
+}

@@ -15,8 +15,11 @@ body {
   width: 20%;
   box-sizing: border-box;
   border-right: 2px solid white;
-  padding-top: 30px;
+  padding-top: 1.5em;
   padding-left: 5px;
+}
+.sidebar input {
+  width: 90%;
 }
 .sidebar a {
   color: white;
@@ -25,6 +28,23 @@ body {
 .sidebar a:hover {
   color: #eff;
   font-weight: bold;
+}
+@media screen and (max-width: 690px) {
+  .main {
+    display: block;
+  }
+  .sidebar {
+    width: 100%;
+    box-sizing: border-box;
+    border-right: none;
+    padding-top: 0;
+  }
+  .sidebar input {
+    width: 60%;
+  }
+  .follower_top {
+    display: none;
+  }
 }
 .follower_lanking a {
   text-shadow: 0 0 3px #ddd, 0 0 8px #ddd;
@@ -44,13 +64,28 @@ body {
 }
 .content h1 {
   color: #f36;
-  margin: 20px 0 30px 20px;
+  margin: 0.5em 0 1em 0.5em;
   text-shadow: 0 0 3px red, 0 0 8px red;
 }
 .content h3 {
   color: #c6f;
-  padding-bottom: 20px;
+  padding-bottom: 0.5em;
   text-shadow: 0 0 3px #c0c, 0 0 8px #c0c;
+}
+@media screen and (max-width: 690px) {
+  .content {
+    width: 100%;
+  }
+  .content h1 {
+    font-size: 150%;
+  }
+  .content h3 {
+    font-size: 130%;
+    padding-bottom: 0;
+  }
+  .content p {
+    font-size: 120%;
+  }
 }
 .post ul {
   display: -webkit-flex;
@@ -63,11 +98,11 @@ body {
 }
 .post li {
   width: 100%;
-  padding-left: 20px;
+  padding-left: 1em;
   border-right: 1px solid #ddd;
 }
 /*chat*/.rank_chat {
-  margin: 20px 0;
+  margin: 1.5em 0;
 }
 .rank_chat a {
   color: #ddd;

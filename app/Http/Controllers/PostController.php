@@ -87,13 +87,23 @@ class PostController extends Controller
         //画像の保存
         if($request['comments.profile_image'])
         {
-            $file_name = $request['comments.profile_image']->getClientOriginalName();
-            DB::table('comments')
-            ->where('id', $comment->id)
-            ->update(['profile_image' => $file_name]);
-            if($request['comments.profile_image']->extension() == 'gif' || $request['comments.profile_image']->extension() == 'jpeg' || $request['comments.profile_image']->extension() == 'jpg' || $request['comments.profile_image']->extension() == 'png')
+            //開発環境
+            if( app()->isLocal()|| app()->runningUnitTests())
             {
-                $img = $request['comments.profile_image']->storeAs('public/profiles', $file_name);
+                $file_name = $request['comments.profile_image']->getClientOriginalName();
+                DB::table('comments')
+                ->where('id', $comment->id)
+                ->update(['profile_image' => $file_name]);
+                if($request['comments.profile_image']->extension() == 'gif' || $request['comments.profile_image']->extension() == 'jpeg' || $request['comments.profile_image']->extension() == 'jpg' || $request['comments.profile_image']->extension() == 'png')
+                {
+                    $img = $request['comments.profile_image']->storeAs('public/profiles', $file_name);
+                }
+            }else{
+                //本番環境
+                $file_name = $request->image;
+                $path = Storage::disk('s3')->putFile('/', $file_name, 'public');
+                $comment->profile_image=Storage::disk('s3')->url($path);
+                $comment->save();
             }
         }
         return redirect()->back();
@@ -254,7 +264,7 @@ class PostController extends Controller
     }
     
     //キーワード検索画面
-    public function search(Request $request)
+    public function search(Request $request, Comments $comment)
     {
         $comments = Comments::paginate(10);
         $search_comment = $request->input('search');
@@ -285,9 +295,32 @@ class PostController extends Controller
             }
             $replies=$query->paginate(10);
         }
+        
+        //steam 
+        $client = new \GuzzleHttp\Client();
+        $apex_url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=1172470&format=json';
+        $pubg_url='http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=578080&format=json';
+
+        $apex_response = $client->request(
+            'GET',
+            $apex_url,
+            ['Bearer' => config('services.steam.token')]
+        );
+        $apex_news = json_decode($apex_response->getBody(), true);
+        $pubg_response = $client->request(
+            'GET',
+            $pubg_url,
+            ['Bearer' => config('services.steam.token')]
+        );
+        $pubg_news = json_decode($pubg_response->getBody(), true);
+        
+        $latest_comment = Comments::where('user_id', '=', $comment->user_id);
         return view('posts/search')->with([
             'comments' => $comments,
-            'replies' => $replies]);
+            'replies' => $replies,
+            'apex_newses' => $apex_news['appnews']['newsitems'],
+            'pubg_newses' => $pubg_news['appnews']['newsitems']
+        ]);
     }
     
     //画像アイコン登録

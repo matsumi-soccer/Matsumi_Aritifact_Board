@@ -21,7 +21,7 @@ body{
 }
 
 .pasts{
-    width:75%;
+    width:70%;
     h2{
         color: #FF3366;
         margin:10px 0;
@@ -81,9 +81,9 @@ body{
 }
 
 .my-detail{
-    width:25%;
+    width:30%;
     box-sizing: border-box;
-    border-left: double 5px #BBFFFF;
+    border-right: double 5px #BBFFFF;
     padding-top: 10px;
     padding-right: 5px;
     padding-left: 1em;
@@ -111,6 +111,43 @@ body{
     }
 }
 
+@media screen and (max-width: 900px)
+{
+    .userpage-body{
+        display:block;
+        padding:0;
+        h3{
+            font-size:200%;
+        }
+        .pasts{
+            width:100%;
+        }
+        .my-detail{
+            width:100%;
+            border-right:none;
+            border-bottom: double 5px #BBFFFF;
+            display:flex;
+            margin-bottom:2em;
+            padding:1em;
+            .my-rank{
+                margin:0 1em;
+            }
+            .basic-profile img{
+                margin:0.5em ;
+                width:100px;
+                height:100px;
+            }
+            .user-name{
+                margin:0 0.5em;
+            }
+        }
+        
+        .pasts{
+            padding:0 1em;
+        }
+    }
+    
+}
 
 //userpage
 .content{
@@ -119,9 +156,13 @@ body{
         width:65%;
         padding:0 1em;
         display:flex;
+        img{
+            border-radius:50%;
+            margin:0.5em 0;
+        }
         h2{
             color: #FF3366;
-            margin: 0.5em 0;
+            margin: 0.5em;
             text-shadow: 0 0 3px red,0 0 8px red;
         }
         h3{
@@ -133,8 +174,17 @@ body{
             padding-left:0;
         }
         .detail-left{
-            width:50%;
+            width:30%;
+            margin-right:2em;
+            border-right:1px solid #DDDDDD;
+            .user{
+                text-align:center;    
+            }
+            .posts{
+                margin:0 auto;
+            }
         }
+        
         .detail-right{
             width:50%;
         }
@@ -142,7 +192,7 @@ body{
     .steam-news{
         border-left:1px solid #DDDDDD;
         width:35%;
-        padding:1em;
+        padding:0 1em;
         .news{
             a{
                 color:  #DDDDDD;
@@ -153,10 +203,94 @@ body{
                 }
             }
         }
+        .game-title{
+            color: #CC66FF;
+            text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+        }
         h3{
             margin: 0.5em 0;
             color: #00FFFF;
             text-shadow: 0 0 3px #0000FF,0 0 8px #0000FF;
         }
+    }
+}
+.footer-none{
+    display:none;
+}
+
+@media screen and (max-width: 900px){
+    .content{
+        display:block;
+        .user-detail{
+            display:block;
+            width:100%;
+            .detail-left{
+                display:flex;
+                width:100%;
+                border-right:none;
+                border-bottom: double 5px #BBFFFF;
+                .user{
+                    width:30%;
+                }
+                .footer{
+                    display:none;
+                }
+                .follow-modeule{
+                    margin:0.5em;
+                }
+            }
+            .detail-right{
+                width:100%;
+                border-bottom: double 5px #BBFFFF;
+            }
+        }
+        .steam-news{
+            width:100%;
+        }
+        .footer-none{
+            display:block;
+            padding:10px 5px;
+            a{
+                color:	#EEEEEE;
+                text-decoration: none;
+                 &:hover{
+                    color: #EEFFFF;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px){
+    .content{
+        .user-detail{
+            img{
+                width:100px;
+                height:100px;
+            }
+            .detail-left{
+                display:block;
+                .user{
+                    text-align:center;
+                    width:100%;
+                }
+                .posts{
+                    text-align:center;
+                    .center p{
+                        display: inline-block;
+                        text-align: left;
+                    }
+                }
+            }
+            .detail-right{
+                h3{
+                    text-align:center;
+                }
+            }
+        }
+        .steam-news h3{
+            text-align:center;
+        } 
     }
 }

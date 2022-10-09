@@ -10,6 +10,61 @@
     </head>
     <body>
         <div class="userpage-body">
+            <!--左サイドバー-->
+            <div class="my-detail userpage-flex">
+                <div class="basic-profile">
+                    <h3 class="user-name">{{Auth::user()->name}}</h3>
+                    <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                        <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
+                    <?php else:?>
+                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
+                    <?php endif;?>
+                    <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
+                      @csrf
+                        <input type="file" name="image">
+                        <input type="submit" value="アイコン変更">
+                    </form>
+                </div>
+                
+                <!--my_gamerank-->
+                <div class="my-rank">
+                    <h3 class="title">GameRank</h3>
+                    <div class="my_apexrank">
+                            @foreach($apexes as $apex)
+                                <?php if((Auth::user()->apex_rank) == 100): ?>
+                                    <p>Apex Legends：unlanked</p>
+                                    @break
+                                <?php elseif(($apex->id)==(Auth::user()->apex_rank)): ?>
+                                    <p>Apex Legends：{{$apex->rank}}</p>
+                                <?php else: ?>
+                                <?php endif; ?>
+                            @endforeach
+                        </div>
+                    <div class="my_valorantrank">
+                        @foreach($valorants as $valorant)
+                            <?php if((Auth::user()->valorant_rank) == 100): ?>
+                                <p>Valorant：unlanked</p>
+                                @break
+                            <?php elseif(($valorant->id)==(Auth::user()->valorant_rank)): ?>
+                                <p>Valorant：{{$valorant->rank}}</p>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        @endforeach
+                    </div>
+                    <div class="my_pubgrank">
+                        @foreach($pubgs as $pubg)
+                            <?php if((Auth::user()->pubg_rank) == 100): ?>
+                                <p>PUBG：unlanked</p>
+                                @break
+                            <?php elseif(($pubg->id)==(Auth::user()->pubg_rank)): ?>
+                                <p>PUBG：{{$pubg->rank}}</p>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <!--コメント一覧-->
             <div class="pasts userpage-flex">
                 <!--過去のコメント-->
                 <div class="chatteds">
@@ -85,62 +140,6 @@
                         　　<?php endif; ?>
                         </div>
                     @endforeach
-                </div>
-            </div>
-            
-             <!--右サイドバー-->
-            <div class="my-detail userpage-flex">
-                <div class="basic-profile">
-                    <h3 class="user-name">{{Auth::user()->name}}</h3>
-                    <p>{{Auth::user()->profile_image}}</p>
-                    <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
-                        <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
-                    <?php else:?>
-                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
-                    <?php endif;?>
-                    <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
-                      @csrf
-                        <input type="file" name="image">
-                        <input type="submit" value="アイコン変更">
-                    </form>
-                </div>
-                
-                <!--my_gamerank-->
-                <div class="my-rank">
-                    <h3 class="title">GameRank</h3>
-                    <div class="my_apexrank">
-                            @foreach($apexes as $apex)
-                                <?php if((Auth::user()->apex_rank) == 100): ?>
-                                    <p>Apex Legends：unlanked</p>
-                                    @break
-                                <?php elseif(($apex->id)==(Auth::user()->apex_rank)): ?>
-                                    <p>Apex Legends：{{$apex->rank}}</p>
-                                <?php else: ?>
-                                <?php endif; ?>
-                            @endforeach
-                        </div>
-                    <div class="my_valorantrank">
-                        @foreach($valorants as $valorant)
-                            <?php if((Auth::user()->valorant_rank) == 100): ?>
-                                <p>Valorant：unlanked</p>
-                                @break
-                            <?php elseif(($valorant->id)==(Auth::user()->valorant_rank)): ?>
-                                <p>Valorant：{{$valorant->rank}}</p>
-                            <?php else: ?>
-                            <?php endif; ?>
-                        @endforeach
-                    </div>
-                    <div class="my_pubgrank">
-                        @foreach($pubgs as $pubg)
-                            <?php if((Auth::user()->pubg_rank) == 100): ?>
-                                <p>PUBG：unlanked</p>
-                                @break
-                            <?php elseif(($pubg->id)==(Auth::user()->pubg_rank)): ?>
-                                <p>PUBG：{{$pubg->rank}}</p>
-                            <?php else: ?>
-                            <?php endif; ?>
-                        @endforeach
-                    </div>
                 </div>
             </div>
         </div>
