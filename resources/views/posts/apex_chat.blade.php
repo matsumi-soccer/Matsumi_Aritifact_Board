@@ -150,9 +150,11 @@
                                     <p class="padding-bottom">{{$comment->created_at}}</p>
                                     <?php if($comment->profile_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                                            <p>開発</p>
                                             <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
                                         <?php else:?>
-                                            <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$comment->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
+                                            <p>本番</p>
+                                            <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
                                         <?php endif;?>
                                     <?php endif;?>
                                     
