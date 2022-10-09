@@ -145,14 +145,25 @@ class PostController extends Controller
         //画像の保存
         if($request['replies.reply_image'])
         {
-            $file_name = $request['replies.reply_image']->getClientOriginalName();
-            DB::table('replies')
-            ->where('id', $reply->id)
-            ->update(['reply_image' => $file_name]);
-            if($request['replies.reply_image']->extension() == 'gif' || $request['replies.reply_image']->extension() == 'jpeg' || $request['replies.reply_image']->extension() == 'jpg' || $request['replies.reply_image']->extension() == 'png')
+            //開発環境
+            if( app()->isLocal()|| app()->runningUnitTests())
             {
-                $img = $request['replies.reply_image']->storeAs('public/profiles', $file_name);
+                $file_name = $request['replies.reply_image']->getClientOriginalName();
+                DB::table('replies')
+                ->where('id', $reply->id)
+                ->update(['reply_image' => $file_name]);
+                if($request['replies.reply_image']->extension() == 'gif' || $request['replies.reply_image']->extension() == 'jpeg' || $request['replies.reply_image']->extension() == 'jpg' || $request['replies.reply_image']->extension() == 'png')
+                {
+                    $img = $request['replies.reply_image']->storeAs('public/profiles', $file_name);
+                }
+            }else{
+                //本番環境
+                $file_name = $request['replies.reply_image'];
+                $path = Storage::disk('s3')->putFile('/', $file_name, 'public');
+                $reply->reply_image=Storage::disk('s3')->url($path);
+                $reply->save();
             }
+            
         }
         
         return redirect()->back();

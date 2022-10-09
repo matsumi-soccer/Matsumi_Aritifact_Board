@@ -41,7 +41,7 @@
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                             <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
                                         <?php else:?>
-                                            <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$comment->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
+                                            <img src="{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
                                         <?php endif;?>
                                     <?php endif;?>
                                     <!--リプライ数カウント-->
@@ -122,7 +122,7 @@
                                                                      <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                                                         <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
                                                                     <?php else:?>
-                                                                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$reply->reply_image}}"　alt="プロフィール画像"　width="150" height="150">
+                                                                        <img src="{{$reply->reply_image}}"　alt="画像"　width="150" height="150">
                                                                     <?php endif;?>
                                                                 <?php endif;?>
                                                             </div>
@@ -150,11 +150,8 @@
                                     <p class="padding-bottom">{{$comment->created_at}}</p>
                                     <?php if($comment->profile_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
-                                            <p>開発</p>
                                             <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
                                         <?php else:?>
-                                            <p>本番</p>
-                                            <p>{{$comment->profile_image}}</p>
                                             <img src="{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
                                         <?php endif;?>
                                     <?php endif;?>
@@ -237,7 +234,7 @@
                                                                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                                                         <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
                                                                     <?php else:?>
-                                                                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{$reply->reply_image}}"　alt="プロフィール画像"　width="150" height="150">
+                                                                        <img src="{{$reply->reply_image}}"　alt="画像"　width="150" height="150">
                                                                     <?php endif;?>
                                                                 <?php endif;?>
                                                             </div>
