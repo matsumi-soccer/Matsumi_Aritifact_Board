@@ -96,7 +96,7 @@
                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                         <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
                     <?php else:?>
-                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{Auth::user)->profile_image"　alt="プロフィール画像"　width="150" height="150">
+                        <img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
                     <?php endif;?>
                     <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
                       @csrf
