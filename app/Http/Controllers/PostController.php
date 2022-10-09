@@ -101,7 +101,7 @@ class PostController extends Controller
                 }
             }else{
                 //本番環境
-                $file_name = $request->image;
+                $file_name = $request['comments.profile_image'];
                 $path = Storage::disk('s3')->putFile('/', $file_name, 'public');
                 $comment->profile_image=Storage::disk('s3')->url($path);
                 $comment->save();
