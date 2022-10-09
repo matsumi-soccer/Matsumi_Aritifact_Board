@@ -1,5 +1,5 @@
 # 名前
-Sophisticated game board
+Sophisticated Game Board
  
 # 概要
 昨今の対人ゲームはプレイヤーがどのくらい強いかを比較可能にし明示するランクシステムが備わるゲームが多い。  
@@ -7,7 +7,10 @@ Sophisticated game board
 なので、掲示板内のグループによって投稿できる権限が異なる機能を持つ掲示板作成しました。  
  
 # HOME画面
-<img width="940" alt="GameBoard" src="https://user-images.githubusercontent.com/85006242/193772778-5ced7385-f651-4c42-9c0f-ad24d142799e.PNG">
+<img width="940" alt="GameBoard" src="https://user-images.githubusercontent.com/85006242/194742209-06d4e899-6eef-4f5f-ada0-9a774892f25c.png">
+
+# Myページ
+<img widhi="940" alt="mypage" src="https://user-images.githubusercontent.com/85006242/194742263-91c8fed4-e11d-4448-ab21-41dcb5309f81.png">
  
 # 機能
 ・コメント,リプライ機能(画像添付〇)  
@@ -22,3 +25,4 @@ Sophisticated game board
 * my12947mg@outlook.jp
 
 # URL
+https://cryptic-river-14096.herokuapp.com/
