@@ -45,6 +45,7 @@ class AddImageController extends Controller
             DB::table('users')
                 ->where('id', \Auth::user()->id)
                 ->update(['profile_image' => $path]);
+            return redirect()->back();
             
         }
 
