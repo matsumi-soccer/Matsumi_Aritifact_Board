@@ -40,8 +40,8 @@ class AddImageController extends Controller
         }else{
             # 本番環境
             $file_name = $request->image;
-            Storage::disk('s3')->delete($image);
-            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            Storage::disk('s3')->delete($file_name);
+            $path = Storage::disk('s3')->putFile('/', $file_name, 'public');
             DB::table('users')
                 ->where('id', \Auth::user()->id)
                 ->update(['profile_image' => $path]);
