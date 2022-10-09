@@ -119,7 +119,7 @@
                                                                 <p class="padding-bottom">{{$reply->user->name}}：{{$reply->body}}</p>
                                                                 <p class="padding-bottom">{{$reply->created_at}}</p>
                                                                 <?php if($reply->reply_image != NULL) :?>
-                                                                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                                                                    <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                                                         <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
                                                                     <?php else:?>
                                                                         <img src="{{$reply->reply_image}}"　alt="画像"　width="150" height="150">

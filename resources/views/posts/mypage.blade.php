@@ -80,7 +80,11 @@
                                         <p>更新：{{$comment->updated_at}}</p>
                                     </div>
                                     <?php if($comment->profile_image != NULL) :?>
-                                        <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
+                                        <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                                            <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
+                                        <?php else:?>
+                                            <img src="{{$comment->profile_image}}"　alt="画像"　width="150" height="150">
+                                        <?php endif;?>
                                     <?php endif;?>
                                     <!--コメント編集・削除-->
                                     <div class="comment-edit">
@@ -123,7 +127,11 @@
                                         <p>更新：{{$reply->updated_at}}</p>
                                     </div>
                                     <?php if($reply->reply_image != NULL) :?>
-                                        <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
+                                        <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
+                                            <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
+                                        <?php else:?>
+                                            <img src="{{$reply->reply_image}}"　alt="画像"　width="150" height="150">
+                                        <?php endif;?>
                                     <?php endif;?>
                                     <div class="comment-edit"> 
                                         <div class="edit"><button class="btn btn-info"><a href="/posts/reply/{{$reply->id}}/edit">編集</a></button></div>
