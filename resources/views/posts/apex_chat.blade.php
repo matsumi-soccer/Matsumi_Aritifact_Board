@@ -8,7 +8,7 @@
         <title>Posts</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="/css/app.css">
+        <!--<link rel="stylesheet" href="/css/app.css">-->
         <link rel="stylesheet" href="/css/chat.css">
     </head>
     <body>
@@ -36,7 +36,7 @@
                                         <a href="/posts_userpage/{{$comment->id}}">{{$comment->user->name}}</a>
                         　　          <?php endif; ?>
                         　　          <p class="reply-bottom">{{$comment->body}}</p>
-                                    <p class="reply-bottom">{{$comment->created_at}}</p>
+                                    <p class="reply-bottom">{{$comment->created_at->format('Y/m/d h:m')}}</p>
                                     <?php if($comment->profile_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                             <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
@@ -117,7 +117,7 @@
                                                         <?php if ($reply->comment_id == $comment->id):?>
                                                             <div class="reply">
                                                                 <p class="padding-bottom">{{$reply->user->name}}：{{$reply->body}}</p>
-                                                                <p class="padding-bottom">{{$reply->created_at}}</p>
+                                                                <p class="padding-bottom">{{$reply->created_at->format('Y/m/d h:m')}}</p>
                                                                 <?php if($reply->reply_image != NULL) :?>
                                                                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                                                         <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">
@@ -147,7 +147,7 @@
                         　　          <?php endif; ?>
                                     <p class="padding-bottom">{{$comment->body}}</p>
                                     
-                                    <p class="padding-bottom">{{$comment->created_at}}</p>
+                                    <p class="padding-bottom">{{$comment->created_at->format('Y/m/d h:m')}}</p>
                                     <?php if($comment->profile_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                             <img src = "{{asset('storage/profiles/'.$comment->profile_image)}}" alt="画像" width="150" height="150">
@@ -229,7 +229,7 @@
                                                         <?php if ($reply->comment_id == $comment->id):?>
                                                             <div class="reply">
                                                                 <p class="padding-bottom">{{$reply->user->name}}：{{$reply->body}}</p>
-                                                                <p class="padding-bottom">{{$reply->created_at}}</p>
+                                                                <p class="padding-bottom">{{$reply->created_at->format('Y/m/d h:m')}}</p>
                                                                 <?php if($reply->reply_image != NULL) :?>
                                                                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                                                         <img src = "{{asset('storage/profiles/'.$reply->reply_image)}}" alt="画像" width="150" height="150">

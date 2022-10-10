@@ -15,16 +15,20 @@
             <div class="results">
                 <div class="result-comment">
                    <h2>コメントの検索結果</h2>
-                    @foreach($comments as $comment)
-                        <div class="content">
-                            <p class="padding-bottom name">{{$comment->user->name}}</p>
-                            <p class="padding-bottom">コメント：{{$comment->body}}</p>
-                            <p class="padding-bottom">{{$comment->updated_at}}</p>
+                    <?php if($comments != NULL):?>
+                        @foreach($comments as $comment)
+                            <div class="content">
+                                <p class="padding-bottom name">{{$comment->user->name}}</p>
+                                <p class="padding-bottom">コメント：{{$comment->body}}</p>
+                                <p class="padding-bottom">{{$comment->updated_at}}</p>
+                            </div>
+                        @endforeach
+                        <div class='paginate'>
+                            {{$comments->links()}}
                         </div>
-                    @endforeach
-                    <div class='paginate'>
-                        {{$comments->links()}}
-                    </div>
+                    <?php else:?>
+                        <p>該当コメントなし</p>
+                    <?php endif;?>
                 </div>
                 
                 <!--<div class="result-reply">-->
@@ -52,7 +56,7 @@
                     <?php if($apex_newscount <= 3):?>
                         <div class="news">
                             <a href = "{{$apex_news['url']}}">{{$apex_news['title']}}</a>
-                            <p>日時：{{ date('Y/m/d', $apex_news['date']) }}</p>
+                            <p>日時：{{ date('Y/m/d h:m', $apex_news['date']) }}</p>
                             <?php $apex_newscount += 1; ?>
                         </div>
                     <?php endif; ?>
@@ -63,7 +67,7 @@
                     <?php if($pubg_newscount <= 3):?>
                         <div class="news">
                             <a href = "{{$pubg_news['url']}}">{{$pubg_news['title']}}</a>
-                            <p>日時：{{ date('Y/m/d', $pubg_news['date']) }}</p>
+                            <p>日時：{{ date('Y/m/d h:m', $pubg_news['date']) }}</p>
                             <?php $pubg_newscount += 1; ?>
                         </div>
                     <?php endif; ?>

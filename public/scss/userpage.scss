@@ -149,6 +149,20 @@ body{
     
 }
 
+@media screen and (max-width: 500px){
+    .userpage-body{
+        .my-detail{
+            display:block;
+            text-align:center;
+        }
+        .pasts{
+            .edit-date{
+                display:block;
+            }
+        }
+    }
+}
+
 //userpage
 .content{
     display:flex;

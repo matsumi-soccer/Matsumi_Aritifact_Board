@@ -128,6 +128,15 @@ body {
     padding: 0 1em;
   }
 }
+@media screen and (max-width: 500px) {
+  .userpage-body .my-detail {
+    display: block;
+    text-align: center;
+  }
+  .userpage-body .pasts .edit-date {
+    display: block;
+  }
+}
 .content {
   display: flex;
 }

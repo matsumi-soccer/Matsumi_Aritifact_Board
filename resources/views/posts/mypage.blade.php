@@ -22,7 +22,7 @@
                     <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
                       @csrf
                         <input type="file" name="image">
-                        <input type="submit" value="アイコン変更">
+                        <p><input type="submit" value="アイコン変更"></p>
                     </form>
                 </div>
                 
@@ -76,8 +76,8 @@
                                     <p class="past-name">{{$comment->user->name}}</p>
                                     <p>{{$comment->body}}</p>
                                     <div class="edit-date">
-                                        <p>投稿：{{$comment->created_at}}</p>
-                                        <p>更新：{{$comment->updated_at}}</p>
+                                        <p>投稿：{{$comment->created_at->format('Y/m/d h:m')}}</p>
+                                        <p>更新：{{$comment->updated_at->format('Y/m/d h:m')}}</p>
                                     </div>
                                     <?php if($comment->profile_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
@@ -123,8 +123,8 @@
                                     <p class="past-name">{{$reply->user->name}}</p>
                                     <p>{{$reply->body}}</p>
                                     <div class="edit-date">
-                                        <p>投稿：{{$reply->created_at}}</p>
-                                        <p>更新：{{$reply->updated_at}}</p>
+                                        <p>投稿：{{$reply->created_at->format('Y/m/d h:m')}}</p>
+                                        <p>更新：{{$reply->updated_at->format('Y/m/d h:m')}}</p>
                                     </div>
                                     <?php if($reply->reply_image != NULL) :?>
                                         <?php if( app()->isLocal()|| app()->runningUnitTests()):?>

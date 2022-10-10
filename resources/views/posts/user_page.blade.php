@@ -108,7 +108,7 @@
                     <h3>{{$comment->user->name}}の最新コメント</h3>
                     @foreach($latest_comments as $latest)
                         <p>{{$latest->body}}</p>
-                        <p>日時：{{$latest->created_at}}</p>
+                        <p>日時：{{$latest->created_at->format('Y/m/d h:m')}}</p>
                         <?php if($latest->profile_image != NULL) :?>
                             <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
                                 <img src = "{{asset('storage/profiles/'.$latest->profile_image)}}" alt="画像" width="150" height="150">
@@ -130,7 +130,7 @@
                     <?php if($apex_newscount <= 3):?>
                         <div class="news">
                             <a href = "{{$apex_news['url']}}">{{$apex_news['title']}}</a>
-                            <p>日時：{{ date('Y/m/d', $apex_news['date']) }}</p>
+                            <p>日時：{{ date('Y/m/d h:m', $apex_news['date']) }}</p>
                             <?php $apex_newscount += 1; ?>
                         </div>
                     <?php endif; ?>
@@ -141,7 +141,7 @@
                     <?php if($pubg_newscount <= 3):?>
                         <div class="news">
                             <a href = "{{$pubg_news['url']}}">{{$pubg_news['title']}}</a>
-                            <p>日時：{{ date('Y/m/d', $pubg_news['date']) }}</p>
+                            <p>日時：{{ date('Y/m/d h:m', $pubg_news['date']) }}</p>
                             <?php $pubg_newscount += 1; ?>
                         </div>
                     <?php endif; ?>
