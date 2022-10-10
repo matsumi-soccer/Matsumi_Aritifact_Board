@@ -17,6 +17,11 @@ body {
   padding-right: 5px;
   padding-left: 1em;
 }
+.userpage-body .my-detail .user-name {
+  color: #f36;
+  margin: 10px 0;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
 .userpage-body .my-detail .basic-profile img {
   border-radius: 50%;
 }
@@ -27,15 +32,10 @@ body {
   color: #c6f;
   text-shadow: 0 0 3px #c0c, 0 0 8px #c0c;
 }
-.user-name {
-  color: #f36;
-  margin: 10px 0;
-  text-shadow: 0 0 3px red, 0 0 8px red;
-}
-.pasts {
+.userpage-body .pasts {
   width: 70%;
 }
-.pasts h2 {
+.userpage-body .pasts h2 {
   color: #f36;
   margin: 10px 0;
   text-shadow: 0 0 3px red, 0 0 8px red;
@@ -109,7 +109,7 @@ body {
     width: 100%;
     border-right: none;
     border-bottom: double 5px #bff;
-    display: flex;
+    display: block;
     margin-bottom: 2em;
     padding: 1em;
   }
