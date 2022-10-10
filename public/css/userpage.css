@@ -109,7 +109,7 @@ body {
     width: 100%;
     border-right: none;
     border-bottom: double 5px #bff;
-    display: block;
+    display: flex;
     margin-bottom: 2em;
     padding: 1em;
   }
