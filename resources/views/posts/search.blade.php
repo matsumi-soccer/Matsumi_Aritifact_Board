@@ -14,21 +14,17 @@
         <div class="search-body">
             <div class="results">
                 <div class="result-comment">
-                   <h2>コメントの検索結果</h2>
-                    <?php if($comments != NULL):?>
-                        @foreach($comments as $comment)
+                    <h2>コメントの検索結果</h2>
+                    @foreach($comments as $comment)
                             <div class="content">
                                 <p class="padding-bottom name">{{$comment->user->name}}</p>
                                 <p class="padding-bottom">コメント：{{$comment->body}}</p>
-                                <p class="padding-bottom">{{$comment->updated_at}}</p>
+                                <p class="padding-bottom">{{$comment->created_at->format('Y/m/d h:m')}}</p>
                             </div>
-                        @endforeach
-                        <div class='paginate'>
-                            {{$comments->links()}}
-                        </div>
-                    <?php else:?>
-                        <p>該当コメントなし</p>
-                    <?php endif;?>
+                    @endforeach
+                    <div class='paginate'>
+                        {{$comments->links()}}
+                    </div>
                 </div>
                 
                 <!--<div class="result-reply">-->

@@ -128,7 +128,7 @@ body {
     padding: 0 1em;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .userpage-body .my-detail {
     display: block;
     text-align: center;
