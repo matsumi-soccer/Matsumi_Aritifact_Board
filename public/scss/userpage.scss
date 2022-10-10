@@ -12,22 +12,39 @@ body{
     padding:10px 5px;
     display:flex;
     // margin-left:20px;
-}
-
-.user-name{
-    color: #FF3366;
-    margin:10px 0;
-    text-shadow: 0 0 3px red,0 0 8px red;
-}
-
-.pasts{
-    width:70%;
-    h2{
-        color: #FF3366;
-        margin:10px 0;
-		text-shadow: 0 0 3px red,0 0 8px red;
-
+    .my-detail{
+        width:30%;
+        box-sizing: border-box;
+        border-right: double 5px #BBFFFF;
+        padding-top: 10px;
+        padding-right: 5px;
+        padding-left: 1em;
+        .user-name{
+            color: #FF3366;
+            margin:10px 0;
+            text-shadow: 0 0 3px red,0 0 8px red;
+        }
+        .basic-profile img{
+            border-radius:50%;
+        }
+        .my-rank{
+            margin-top:1.5em;
+        }
+        .my-rank h3{
+            color: #CC66FF;
+            text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
+        }
     }
+    .pasts{
+        width:70%;
+        h2{
+            color: #FF3366;
+            margin:10px 0;
+    		text-shadow: 0 0 3px red,0 0 8px red;
+    
+        }
+    }
+
 }
 
 .past-comment{
@@ -78,25 +95,6 @@ body{
 .past-reply{
     border-bottom:1px solid white;
     padding:30px 0;
-}
-
-.my-detail{
-    width:30%;
-    box-sizing: border-box;
-    border-right: double 5px #BBFFFF;
-    padding-top: 10px;
-    padding-right: 5px;
-    padding-left: 1em;
-    .basic-profile img{
-        border-radius:50%;
-    }
-    .my-rank{
-        margin-top:1.5em;
-    }
-    .my-rank h3{
-        color: #CC66FF;
-        text-shadow: 0 0 3px #CC00CC,0 0 8px #CC00CC;
-    }
 }
 
 .footer{
