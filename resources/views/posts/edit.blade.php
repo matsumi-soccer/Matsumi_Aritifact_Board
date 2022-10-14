@@ -20,7 +20,7 @@
                       <input type ="hidden" name = "comments[user_id]" placeholder = "user_id" value="{{Auth::user()->id}}"/>
                       <input type ="hidden" name = "comments[game_id]" placeholder = "{{$comment->game_id}}" value="{{$comment->game_id}}"/>
                       <textarea name="comments[body]" placeholder="Edit comment." cols="60" rows="6">{{$comment->body}}</textarea>
-                      <p>コメント日時：{{$comment->created_at}}</p>
+                      <p>コメント日時：{{$comment->created_at->format('Y/m/d h:m')}}</p>
                   </div>
                   <input type="submit" value="更新">
               </form>

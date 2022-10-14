@@ -22,7 +22,7 @@
                       <input type ="hidden" name = "replies[game_id]" placeholder = "{{$reply->game_id}}" value="{{$reply->game_id}}"/>
                       <input type ="hidden" name = "replies[comment_id]" placeholder = "{{$reply->comment_id}}" value="{{$reply->comment_id}}"/>
                       <textarea name="replies[body]" cols="60" rows="6">{{$reply->body}}</textarea>
-                      <p>コメント日時：{{$reply->created_at}}</p>
+                      <p>コメント日時：{{$reply->created_at->format('Y/m/d h:m')}}</p>
                   </div>
                   <input type="submit" value="更新">
               </form>
