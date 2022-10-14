@@ -18,7 +18,6 @@
                         <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
                     <?php else:?>
                         <?php if((Auth::user()->profile_image) == "game.png") :?>
-                             <p>{{Auth::user()->profile_image}}</p>
                             <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/dEneYPp9hWOaOs7oawHbCTZN0YxYNy4gsd6UkHri.jpg" alt="プロフィール画像"　width="150" height="150">
                         <?php else:?>
                             <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
@@ -28,7 +27,12 @@
                     <?php endif;?>
                     <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
                       @csrf
-                        <input type="file" name="image">
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                        @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p><input type="submit" value="アイコン変更"></p>
                     </form>
                 </div>
