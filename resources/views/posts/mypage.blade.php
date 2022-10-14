@@ -27,12 +27,7 @@
                     <?php endif;?>
                     <form action="{{ route('add_image') }}" enctype='multipart/form-data' method ="POST">
                       @csrf
-                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
-                        @error('image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="file" name="image">
                         <p><input type="submit" value="アイコン変更"></p>
                     </form>
                 </div>

@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'apex_rank' => ['required', 'string', 'max:255'],
             'valorant_rank' => ['required', 'string', 'max:255'],
             'pubg_rank' => ['required', 'string', 'max:255'],
-            'profile_image' => ['required', 'mimes:jpeg,png,jpg,bmb', 'max:2048'], //image画像
+            //'profile_image' => ['required', 'mimes:jpeg,png,jpg,bmb', 'max:2048'], //image画像
         ]);
     }
 
