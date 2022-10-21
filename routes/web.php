@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |a
 */
+// Twitterログイン
+Route::get('/login/twitter', 'TwitterController@redirectToProvider')->name('twitter.login');
+Route::get('/login/twitter/callback', 'TwitterController@handleProviderCallback');
+
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'PostController@index');
     Route::get('/create', 'PostController@create');
@@ -60,8 +64,10 @@ Route::group(['middleware' => ['auth']], function(){
     //コメント,リプライ削除,フォロー解除,いいね解除
     Route::delete('/posts/{comment}', 'PostController@delete');
     Route::delete('/posts/reply/{reply}', 'PostController@reply_delete');
+    
 });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
 ?>

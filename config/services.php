@@ -33,5 +33,11 @@ return [
     'steam' => [
         'token' => env('STEAM_ACCESS_TOKEN')
     ],
+    
+    'twitter' => [
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_CALLBACKURL'),
+    ],
 
 ];

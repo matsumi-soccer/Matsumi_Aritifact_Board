@@ -65,6 +65,9 @@
                             </div>
                         </div>
                     </form>
+                    <p class="mt=2"  style="text-align:center">
+                        <a href="{{route('twitter.login')}}" class="btn btn-outline-primary">Twitter</a>
+                    </p>
                 </div>
             </div>
         </div>
