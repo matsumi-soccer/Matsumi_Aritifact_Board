@@ -286,7 +286,7 @@ class PostController extends Controller
     //followerランキング画面
     public function follower_lanking(Comments $comment, FollowUser $followuser)
     {
-         return view('posts/follower_lanking')->with([
+         return view('posts/follower_ranking')->with([
              'comments' => $comment->get(),
              'follows' => $followuser->getAllCountAmount()
         ]);

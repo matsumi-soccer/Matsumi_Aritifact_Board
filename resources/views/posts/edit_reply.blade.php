@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>chat</title>
+        <title>Edit_Reply</title>
         <link rel="stylesheet" href="/css/edit.css">
     </head>
     <body>

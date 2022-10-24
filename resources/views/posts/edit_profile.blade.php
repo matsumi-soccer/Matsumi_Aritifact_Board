@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>chat</title>
+        <title>Edit_Profile</title>
         <link rel="stylesheet" href="/css/edit.css">
     </head>
     <body>
@@ -20,7 +20,7 @@
                     
                     <!--email変更-->
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('E-Mail アドレス') }}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="user[email]" value="{{ old('email') }}" required autocomplete="email">
@@ -35,7 +35,7 @@
                         
                     <!--年齢 -->
                     <div class="form-group row">
-                        <label for="age" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;;">{{ __('Age') }}</label>
+                        <label for="age" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;;">{{ __('年齢') }}</label>
 
                         <div class="col-md-6">
                             <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="user[age]" value="{{ old('age') }}" required autocomplete="age" autofocus>
@@ -49,7 +49,7 @@
                         
                     <!--性別 -->
                     <div class="form-group row">
-                        <label for="sex" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('Sex') }}</label>
+                        <label for="sex" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('性別') }}</label>
 
                         <div class="col-md-6">
                             <!--<input id="sex" type="text" class="form-control @error('sex') is-invalid @enderror" name="sex" value="{{ old('sex') }}" required autocomplete="sex" autofocus>-->
@@ -68,7 +68,7 @@
                         
                     <!--apexランク-->
                     <div class="form-group row">
-                        <label for="apex_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('Apex_rank') }}</label>
+                        <label for="apex_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('Apex ランク') }}</label>
 
                         <div class="col-md-6">
                             <!--<input id="apex_rank" type="text" class="form-control @error('apex_rank') is-invalid @enderror" name="apex_rank" value="{{ old('apex_rank') }}" required autocomplete="apex_rank" autofocus>-->
@@ -94,7 +94,7 @@
                         
                     <!--Valorantランク -->
                     <div class="form-group row">
-                        <label for="valorant_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('Valorant_rank') }}</label>
+                        <label for="valorant_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('Valorant ランク') }}</label>
 
                         <div class="col-md-6">
                             <!--<input id="valorant_rank" type="text" class="form-control @error('valorant_rank') is-invalid @enderror" name="valorant_rank" value="{{ old('valorant_rank') }}" required autocomplete="valorant_rank" autofocus>-->
@@ -121,7 +121,7 @@
                         
                     <!--PUBGランク -->
                     <div class="form-group row">
-                        <label for="pubg_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('PUBG_rank') }}</label>
+                        <label for="pubg_rank" class="col-md-4 col-form-label text-md-right" style=" color:#DDDDD;">{{ __('PUBG ランク') }}</label>
 
                         <div class="col-md-6">
                             <!--<input id="pubg_rank" type="text" class="form-control @error('pubg_rank') is-invalid @enderror" name="pubg_rank" value="{{ old('pubg_rank') }}" required autocomplete="pubg_rank" autofocus>-->

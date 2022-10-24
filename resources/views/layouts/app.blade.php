@@ -26,7 +26,7 @@
             <div class="container">
                 <a class="navbar-brand header-name" href="{{ url('/') }}" style="color:#DDDDDD;text-shadow: 0 0 3px red,0 0 8px red;">
                     <!--{{ config('app.name', 'Laravel') }}-->
-                    Game掲示板
+                    Sophisticated Game Board
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -43,11 +43,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"  style="color:#DDDDDD">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}"  style="color:#DDDDDD">{{ __('ログイン') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"  style="color:#DDDDDD">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}"  style="color:#DDDDDD">{{ __('新規登録') }}</a>
                                 </li>
                             @endif
                         @else
