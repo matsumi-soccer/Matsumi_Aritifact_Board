@@ -43,3 +43,22 @@ body {
     font-size: 150%;
   }
 }
+.profile-edit-body {
+  padding-left: 1em;
+}
+.profile-edit-body a {
+  color: #ddd;
+  text-decoration: none;
+}
+.profile-edit-body a:hover {
+  color: #eff;
+  font-weight: bold;
+}
+.profile-edit-body h3 {
+  color: #f36;
+  margin-bottom: 2em 0;
+  text-shadow: 0 0 3px red, 0 0 8px red;
+}
+.profile__body label {
+  color: #ddd DD;
+}

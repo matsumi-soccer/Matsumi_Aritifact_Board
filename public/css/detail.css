@@ -13,6 +13,7 @@ body {
 }
 .follower-body a {
   color: #eee;
+  font-size: 25px;
 }
 .follower-body a:hover {
   color: #eff;
@@ -28,9 +29,6 @@ body {
   background: repeating-linear-gradient(0deg, #c62828 0.1em, #ef5350 0.2em, #ffebee 0.3em, #ef5350 0.4em, #c62828 0.5em);
   -webkit-background-clip: text;
 }
-.follower-body a {
-  font-size: 25px;
-}
 .follower-body p {
   font-size: 25px;
 }
@@ -43,15 +41,29 @@ body {
 @media screen and (max-width: 620px) {
   .follower-body {
     width: 100%;
+    padding: 0em 0.5em;
+    text-align: left;
   }
   .follower-body h2 {
     font-size: 200%;
+    text-align: left;
   }
   .follower-body a {
     font-size: 20px;
+    margin-right: 0.5em;
   }
   .follower-body p {
     font-size: 20px;
+  }
+  .follower-body .ranks {
+    margin: 0;
+    display: flex;
+    width: 100%;
+    border-bottom: none;
+  }
+  .follower-body .ranks p {
+    font-size: 100%;
+    margin: auto 0;
   }
 }
 .search-body {

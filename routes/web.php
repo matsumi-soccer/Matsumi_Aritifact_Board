@@ -51,6 +51,10 @@ Route::group(['middleware' => ['auth']], function(){
     //ユーザーページ
     Route::get('posts_userpage/{comment}', 'PostController@userpage');
     
+    //ユーザ情報編集
+    Route::get('/profile/{user}/edit', 'PostController@edit_profile');
+    Route::put('/profile/{user}', 'PostController@update_profile');
+    
     //掲示板表示
     Route::get('/apex/{apex}', 'PostController@apex_chat');
     Route::get('/valorant/{valorant}', 'PostController@valorant_chat');
