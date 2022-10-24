@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-
+                        <p style="text-align:center; color:black;">名前は一度登録すると変更ができません</p>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right" style=" color:black;">{{ __('Name') }}</label>
 

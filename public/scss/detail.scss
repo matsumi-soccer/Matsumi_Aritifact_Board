@@ -15,6 +15,7 @@ body{
     text-align:center;
     a{
         color:	#EEEEEE;
+        font-size:25px;
         &:hover{
             color: #EEFFFF;
             font-weight: bold;
@@ -29,9 +30,6 @@ body{
     	color: transparent;
     	background: repeating-linear-gradient(0deg, #C62828 0.1em, #EF5350 0.2em, #FFEBEE 0.3em, #EF5350 0.4em, #C62828 0.5em); 
     	-webkit-background-clip: text;
-    }
-    a{
-        font-size:25px;
     }
     p{
         font-size:25px;
@@ -48,14 +46,28 @@ body{
 @media screen and (max-width: 620px){
     .follower-body{
         width:100%;
+        padding:0em 0.5em;
+        text-align:left;
         h2{
             font-size:200%;
+            text-align:left;
         }
         a{
             font-size:20px;
+            margin-right:0.5em;
         }
         p{
             font-size:20px;
+        }
+        .ranks{
+            margin:0;
+            display:flex;
+            width:100%;
+            border-bottom:none;
+            p{
+                font-size:100%;
+                margin: auto 0;
+            }
         }
     
     }

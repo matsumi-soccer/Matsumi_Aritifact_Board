@@ -11,6 +11,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Requests\FollowRequest;
 use App\Http\Requests\LikeRequest;
+use App\Http\Requests\UserRequest;
 use App\Comments;
 use App\Reply;
 use App\Apex;
@@ -265,6 +266,22 @@ class PostController extends Controller
             'pubg_newses' => $pubg_news['appnews']['newsitems'],
         ]);
     }
+    
+    //ユーザ情報編集画面
+    public function edit_profile(User $user)
+    {
+        return view('posts/edit_profile')->with(['user' => $user]);
+    }
+    
+    //ユーザ情報更新
+    public function update_profile(UserRequest $request, User $user)
+    {
+        $input_post = $request['user'];
+        $user->fill($input_post)->save();
+    
+        return redirect('/posts/mypage');
+    }
+    
 
     //followerランキング画面
     public function follower_lanking(Comments $comment, FollowUser $followuser)

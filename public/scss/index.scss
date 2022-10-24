@@ -95,6 +95,7 @@ body{
         }
     }
 }
+
 .post ul{
     display: -webkit-flex;
     display: flex;
@@ -111,6 +112,7 @@ body{
     border-right:1px solid #DDDDDD;
 }
 
+
 /*chat*/
 .rank_chat{
     margin: 1.5em 0;
@@ -123,3 +125,29 @@ body{
         }
     }
 }
+@media screen and (max-width: 550px){
+    .post ul{
+        display: -webkit-block;
+        display:block;
+    }
+    .post li{
+        border-right:none;
+    }
+    .content{
+        width: 100%;
+        h1{
+            font-size:200%;
+        }
+        h3{
+          font-size: 180%;
+          padding-bottom:0;
+        }
+    }
+    .rank_chat{
+        a{
+            font-size:120%;
+        }
+    }
+    
+}
+

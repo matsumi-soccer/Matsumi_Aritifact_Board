@@ -10,6 +10,7 @@ body{
   font-family: 'Noto Serif JP', sans-serif;
 }
 
+//コメント編集
 .edit-body{
     width: 80%;
     padding-left: 3em;
@@ -50,4 +51,25 @@ body{
             font-size:150%;
         }
     }   
+}
+
+.profile-edit-body{
+    padding-left:1em;
+    a{
+        color: #DDDDDD;
+        text-decoration: none;
+        &:hover {
+            color: #EEFFFF;
+            font-weight: bold;
+        }
+    }
+    h3{
+        color: #FF3366;
+        margin-bottom: 2em 0;
+        text-shadow: 0 0 3px red,0 0 8px red;
+    }
+}
+
+.profile__body label{
+    color:#DDDDD;
 }

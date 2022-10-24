@@ -20,12 +20,12 @@
                 <div class="ranks">
                     @foreach($comments as $comment)
                         <?php if (($comment->user->id) == ($follow->followed_user_id)) : ?>
-                            <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}}位：{{$comment->user->name}}</a>
+                            <a href="/posts_userpage/{{$comment->id}}">{{$count_rank}} {{$comment->user->name}}</a>
                             @break
                         <?php else: ?>
             　　          <?php endif; ?>
                     @endforeach
-                    <p>フォロワー：{{$follow->count_userid}}人</p>
+                    <p>{{$follow->count_userid}}フォロワー</p>
                     <?php $count_rank+=1 ?>
                 </div>
                 @endforeach

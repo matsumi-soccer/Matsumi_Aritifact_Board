@@ -64,7 +64,7 @@
                         <ul>
                             <!--apexchat欄-->
                             <li><div class="apexs main-block">
-                                <h3>Apex Legensds</h3>
+                               <h3>Apex Legensds</h3>
                                @foreach ($apex as $apex) 
                                     <div class="apex_rank">
                                         <p class="rank_chat">
@@ -77,7 +77,6 @@
                             <!--valorantchat欄-->
                             <li><div class="valorants main-block">
                                 <h3>Valorant</h3>
-                                
                                 @foreach ($valorant as $valorant) 
                                     <div class="valorant_rank">
                                         <p class="rank_chat">

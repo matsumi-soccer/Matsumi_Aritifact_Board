@@ -14,13 +14,15 @@
             <div class="my-detail userpage-flex">
                 <div class="basic-profile">
                     <h3 class="user-name">{{Auth::user()->name}}</h3>
+                    <!--user情報変更-->
+                    <div class="profile_edit"><button class="btn btn-light"><a href="/profile/{{Auth::user()->id}}/edit">プロフィール情報編集</a></button></div>
                     <?php if( app()->isLocal()|| app()->runningUnitTests()):?>
-                        <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" alt="プロフィール画像" width="150" height="150">
+                        <img src = "{{asset('storage/profiles/'.Auth::user()->profile_image)}}" class="profile_image" alt="プロフィール画像" width="150" height="150">
                     <?php else:?>
                         <?php if((Auth::user()->profile_image) == "game.png") :?>
-                            <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/dEneYPp9hWOaOs7oawHbCTZN0YxYNy4gsd6UkHri.jpg" alt="プロフィール画像"　width="150" height="150">
+                            <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/dEneYPp9hWOaOs7oawHbCTZN0YxYNy4gsd6UkHri.jpg" class="profile_image" alt="プロフィール画像"　width="150" height="150">
                         <?php else:?>
-                            <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">
+                            <img src="https://matsu-backet.s3.ap-northeast-1.amazonaws.com/{{Auth::user()->profile_image}}"　class="profile_image" alt="プロフィール画像"　width="150" height="150">
                         <?php endif;?>
                         <!--<img src="https://s3.ap-northeast-1.amazonaws.com/matsu-backet/{{Auth::user()->profile_image}}"　alt="プロフィール画像"　width="150" height="150">-->
                         

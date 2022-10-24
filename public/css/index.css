@@ -112,3 +112,25 @@ body {
   color: #eff;
   font-weight: bold;
 }
+@media screen and (max-width: 550px) {
+  .post ul {
+    display: -webkit-block;
+    display: block;
+  }
+  .post li {
+    border-right: none;
+  }
+  .content {
+    width: 100%;
+  }
+  .content h1 {
+    font-size: 200%;
+  }
+  .content h3 {
+    font-size: 180%;
+    padding-bottom: 0;
+  }
+  .rank_chat a {
+    font-size: 120%;
+  }
+}
