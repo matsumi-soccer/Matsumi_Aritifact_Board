@@ -10,14 +10,15 @@ Sophisticated Game Board
 <img width="940" alt="GameBoard" src="https://user-images.githubusercontent.com/85006242/194742209-06d4e899-6eef-4f5f-ada0-9a774892f25c.png">
 
 # Myページ
-<img widhi="940" alt="mypage" src="https://user-images.githubusercontent.com/85006242/194742263-91c8fed4-e11d-4448-ab21-41dcb5309f81.png">
+<img width="940" alt="mypage" src="https://user-images.githubusercontent.com/85006242/194742263-91c8fed4-e11d-4448-ab21-41dcb5309f81.png">
  
 # 機能
 ・コメント,リプライ機能(画像添付〇)  
 ・ユーザのランクに応じた機能制限  
 ・コメントいいね,ユーザフォロー機能(非同期)  
 ・検索機能  
-・フォロワーランキング表示  
+・フォロワーランキング表示
+・steam最新ニュース表示
 等
  
 # 作成者
@@ -26,3 +27,6 @@ Sophisticated Game Board
 
 # URL
 https://cryptic-river-14096.herokuapp.com/
+testアカウント
+E-Mail アドレス：tarou_test@gmail.com
+パスワード：tarou_test
