@@ -26,7 +26,7 @@ Sophisticated Game Board
 * my12947mg@outlook.jp
 
 # URL
-https://cryptic-river-14096.herokuapp.com/
-testアカウント
-E-Mail アドレス：tarou_test@gmail.com
-パスワード：tarou_test
+https://cryptic-river-14096.herokuapp.com/  
+testアカウント  
+E-Mail アドレス：tarou_test@gmail.com  
+パスワード：tarou_test  
